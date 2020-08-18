@@ -2,8 +2,8 @@
   <header>
     <img class="logo" alt="Gerbonis" src="@/assets/images/gerbonis.png"/>
     <h1>
-      <span>Ieceļotāju uzskaites kontroles elektroniskā sistēma</span>
-      <span class="badge">TESTS</span>
+      <span>{{ $t('header.title') }}</span>
+      <span class="badge">{{ $t('header.testBadge') }}</span>
     </h1>
   </header>
 </template>
@@ -42,9 +42,27 @@ h1 {
 
   span.badge {
     margin-left: 10px;
-    background: mediumblue;
+    background: $color-medium-blue;
     color: white;
     padding: 3px;
   }
 }
 </style>
+
+<i18n>
+{
+  "en": {
+    "header": {
+      "title": "Immigration Electronic Control System",
+      "testBadge": "TEST"
+    }
+
+  },
+  "lv": {
+    "header": {
+      "title": "Ieceļotāju uzskaites kontroles elektroniskā sistēma",
+      "testBadge": "TEST"
+    }
+  }
+}
+</i18n>

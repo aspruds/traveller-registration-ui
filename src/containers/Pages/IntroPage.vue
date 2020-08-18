@@ -1,19 +1,19 @@
 <template>
   <div class="intro-page">
+    <LanguageSwitcher/>
     <Introduction/>
-    <StartButton/>
   </div>
 </template>
 
 <script>
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
 import Introduction from '@/components/Introduction.vue'
-import StartButton from '@/components/StartButton.vue'
 
 export default {
   name: 'IntroPage',
   components: {
-    Introduction,
-    StartButton
+    LanguageSwitcher,
+    Introduction
   }
 }
 </script>
