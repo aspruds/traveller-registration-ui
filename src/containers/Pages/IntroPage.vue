@@ -22,6 +22,7 @@ export default {
 @import '@/assets/styles/common.scss';
 
 .intro-page {
-    margin: 40px;
+    padding: 40px;
+    margin: 0;
 }
 </style>

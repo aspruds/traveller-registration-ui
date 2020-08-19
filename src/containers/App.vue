@@ -1,19 +1,17 @@
 <template>
   <div id="app">
     <Header/>
-    <IntroPage/>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import IntroPage from '@/containers/Pages/IntroPage.vue'
 import Header from '@/components/Header.vue'
 
 export default {
   name: 'App',
   components: {
-    Header,
-    IntroPage
+    Header
   }
 }
 </script>

@@ -1,12 +1,12 @@
 <template>
-  <button>
+  <button @click="$emit('click')">
     {{ title }}
   </button>
 </template>
 
 <script>
 export default {
-  name: 'StartButton',
+  name: 'Button',
   props: ['title']
 }
 </script>
@@ -16,12 +16,16 @@ export default {
 @import '@/assets/styles/common.scss';
 
 button {
+  cursor: pointer;
   padding: 10px;
   width: 100%;
+  margin-bottom: 15px;
 
   @include media(">=phone") {
     padding: 5px;
     width: auto;
+    margin-bottom: 0;
+    margin-right: 15px;
   }
 }
 </style>

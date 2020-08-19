@@ -1,9 +1,12 @@
 <template>
   <div class="language-switcher">
     <ul>
-      <li @click="switchLocale('en')" :class="$i18n.locale == 'en' ? 'active' : null">English</li>
-      <li @click="switchLocale('lv')" :class="$i18n.locale == 'lv' ? 'active' : null">Latviešu</li>
-      <li @click="switchLocale('ru')" :class="$i18n.locale == 'ru' ? 'active' : null">По-русски</li>
+      <li v-for="lng in languages"
+          :key="lng.code"
+          @click="switchLocale(lng.code)"
+          :class="$i18n.locale === lng.code ? 'active' : null">
+        {{ lng.name }}
+      </li>
     </ul>
   </div>
 </template>
@@ -14,6 +17,24 @@ export default {
   methods: {
     switchLocale(locale) {
       this.$root.$i18n.locale = locale;
+    }
+  },
+  data: function () {
+    return {
+      languages: [
+        {
+          code: "en",
+          name: "English"
+        },
+        {
+          code: "lv",
+          name: "Latviešu"
+        },
+        {
+          code: "ru",
+          name: "По-русски"
+        }
+      ]
     }
   }
 }

@@ -2,16 +2,23 @@
   <div class="introduction">
     <h1>{{ $t('introduction.title') }}</h1>
     <p>{{ $t('introduction.willBeSubmittedToSPKC') }}</p>
-    <StartButton :title="$t('introduction.startButton')" class="start-button" />
+    <Button @click="showTravelDetails()" :title="$t('introduction.startButton')" class="start-button" />
   </div>
 </template>
 
 <script>
-import StartButton from "@/components/StartButton";
+import Button from "@/components/Button";
 export default {
   name: 'Introduction',
   components: {
-    StartButton
+    Button
+  },
+  methods: {
+    showTravelDetails() {
+      if (this.$route.name !== 'TravelDetailsPage') {
+        this.$router.push({ name: 'TravelDetailsPage' })
+      }
+    }
   }
 }
 </script>
