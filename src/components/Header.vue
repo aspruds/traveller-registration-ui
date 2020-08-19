@@ -1,10 +1,14 @@
 <template>
   <header>
     <img class="logo" alt="Gerbonis" src="@/assets/images/gerbonis.png"/>
-    <h1>
-      <span>{{ $t('header.title') }}</span>
-      <span class="badge">{{ $t('header.testBadge') }}</span>
-    </h1>
+    <div class="title-container">
+      <h1>
+        {{ $t('header.title') }}
+      </h1>
+      <v-chip class="pa-3 badge secondary" label>
+        {{ $t('header.testBadge') }}
+      </v-chip>
+    </div>
   </header>
 </template>
 
@@ -21,32 +25,42 @@ export default {
 header {
   display: flex;
   padding: 8px 12px 8px 12px;
-  @include box-shadow(0, 4px, 2px, -2px, $color-light-grey)
-}
+  @include box-shadow(0, 4px, 2px, -2px, $color-light-grey);
 
-img.logo {
-  flex: 0 1 auto;
-  margin: auto 12px auto auto;
-  height: 40px;
-}
-
-h1 {
-  flex: 2 0 auto;
-  text-align: left;
-  font-size: em(18);
-
-  span {
-    position: relative;
-    top: 10px;
+  img.logo {
+    flex: 0 1 auto;
+    margin: auto 12px auto auto;
+    height: 40px;
   }
 
-  span.badge {
-    margin-left: 10px;
-    background: $color-medium-blue;
-    color: white;
-    padding: 3px;
+  .title-container {
+    flex: 2 0 auto;
+    display: block;
+    margin-top: 5px;
+
+    @include media(">=phone") {
+      display: flex;
+    }
+
+    h1 {
+      flex: 0 0 auto;
+      text-align: left;
+      font-size: em(18);
+
+      @include media(">=phone") {
+        margin-top: 3px;
+        margin-right: 5px;
+      }
+    }
+
+    .badge {
+      flex: 0 0 auto;
+    }
   }
 }
+
+
+
 </style>
 
 <i18n>
@@ -54,14 +68,14 @@ h1 {
   "en": {
     "header": {
       "title": "Immigration Electronic Control System",
-      "testBadge": "TEST"
+      "testBadge": "TEST SYSTEM"
     }
 
   },
   "lv": {
     "header": {
       "title": "Ieceļotāju uzskaites kontroles elektroniskā sistēma",
-      "testBadge": "TEST"
+      "testBadge": "TESTA SISTĒMA"
     }
   }
 }

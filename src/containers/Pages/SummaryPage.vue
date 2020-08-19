@@ -24,7 +24,7 @@ export default {
         this.$router.push({ name: 'DepartedCountriesPage' })
       }
     }
-  }
+  },
 }
 </script>
 
