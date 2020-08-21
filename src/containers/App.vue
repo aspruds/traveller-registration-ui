@@ -1,7 +1,9 @@
 <template>
   <v-app>
     <Header/>
-    <router-view></router-view>
+    <div class="router-container">
+      <router-view></router-view>
+    </div>
   </v-app>
 </template>
 
@@ -23,5 +25,12 @@ export default {
   font-family: 'PT Sans Narrow', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  .router-container {
+    @include media(">=phone") {
+      width: 60%;
+      margin: 0 auto 0 auto;
+    }
+  }
 }
 </style>

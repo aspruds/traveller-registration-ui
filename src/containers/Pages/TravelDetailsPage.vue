@@ -6,7 +6,7 @@
       <v-card-title>{{ $t('travelDetails.subtitles.carrierDetails') }}</v-card-title>
       <v-card-text>
         <v-select
-            v-model="carrierType"
+            v-model="transportDetails.carrierType"
             :items="carrierTypes"
             item-text="name"
             item-value="code"
@@ -15,37 +15,37 @@
             required
         ></v-select>
         <v-text-field
-            v-if="carrierType === 'plane'"
+            v-if="transportDetails.carrierType === 'plane'"
             :rules="[v => !!v || $t('travelDetails.mandatoryField')]"
             :label="$t('travelDetails.flightNumber')"
             single-line
         ></v-text-field>
         <v-dialog
             ref="dateOfEntryDialog"
-            v-model="dateOfEntryDialogVisible"
-            :return-value.sync="dateOfEntry"
+            v-model="transportDetails.dateOfEntryDialogVisible"
+            :return-value.sync="transportDetails.dateOfEntry"
             persistent
             width="290px"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
-                v-model="dateOfEntry"
+                v-model="transportDetails.dateOfEntry"
                 :label="$t('travelDetails.dateOfEntry')"
                 readonly
                 v-bind="attrs"
                 v-on="on"
             ></v-text-field>
           </template>
-          <v-date-picker :locale="$i18n.locale" v-model="dateOfEntry" scrollable>
+          <v-date-picker :locale="$i18n.locale" v-model="transportDetails.dateOfEntry" scrollable>
             <v-spacer></v-spacer>
             <v-btn text color="primary" @click="dateOfEntryDialogVisible = false">{{ $t('travelDetails.cancelButton') }}</v-btn>
-            <v-btn text color="primary" @click="$refs.dateOfEntryDialog.save(dateOfEntry)">{{ $t('travelDetails.confirmButton') }}</v-btn>
+            <v-btn text color="primary" @click="$refs.dateOfEntryDialog.save(transportDetails.dateOfEntry)">{{ $t('travelDetails.confirmButton') }}</v-btn>
           </v-date-picker>
         </v-dialog>
         </v-card-text>
     </v-card>
 
-    <v-card class="elevation-3 form-block">
+    <v-card class="elevation-3 form-block" v-for="pax in passengers" v-bind:key="pax.id">
       <v-card-title>{{ $t('travelDetails.subtitles.passengerDetails') }}</v-card-title>
       <v-card-text>
         <v-text-field
@@ -59,7 +59,7 @@
             single-line
         ></v-text-field>
         <v-select
-            v-model="sex"
+            v-model="pax.sex"
             :items="sexTypes"
             item-text="name"
             item-value="code"
@@ -68,7 +68,7 @@
             required
         ></v-select>
         <v-select
-            v-model="citizenshipCountry"
+            v-model="pax.citizenshipCountry"
             :items="countries"
             item-text="name"
             item-value="code"
@@ -77,36 +77,36 @@
             required
         ></v-select>
         <v-text-field
-            v-if="citizenshipCountry === 'lv'"
+            v-if="pax.citizenshipCountry === 'lv'"
             :label="$t('travelDetails.nationalId')"
             :rules="[v => !!v || $t('travelDetails.mandatoryField')]"
             single-line
         ></v-text-field>
         <v-dialog
             ref="dateOfBirthDialog"
-            v-model="dateOfBirthDialogVisible"
-            :return-value.sync="dateOfBirth"
+            v-model="pax.dateOfBirthDialogVisible"
+            :return-value.sync="pax.dateOfBirth"
             persistent
             width="290px"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
-                v-model="dateOfBirth"
+                v-model="pax.dateOfBirth"
                 :label="$t('travelDetails.dateOfBirth')"
                 readonly
                 v-bind="attrs"
                 v-on="on"
             ></v-text-field>
           </template>
-          <v-date-picker :locale="$i18n.locale" v-model="dateOfBirth" scrollable>
+          <v-date-picker :locale="$i18n.locale" v-model="pax.dateOfBirth" scrollable>
             <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="dateOfBirthDialogVisible = false">{{ $t('travelDetails.cancelButton') }}</v-btn>
-            <v-btn text color="primary" @click="$refs.dateOfBirthDialog.save(dateOfBirth)">{{ $t('travelDetails.confirmButton') }}</v-btn>
+            <v-btn text color="primary" @click="pax.dateOfBirthDialogVisible = false">{{ $t('travelDetails.cancelButton') }}</v-btn>
+            <v-btn text color="primary" @click="$refs.dateOfBirthDialog.save(pax.dateOfBirth)">{{ $t('travelDetails.confirmButton') }}</v-btn>
           </v-date-picker>
         </v-dialog>
         <v-divider></v-divider>
         <v-select
-            v-model="identityDocumentType"
+            v-model="pax.identityDocumentType"
             :items="identityDocumentTypes"
             item-text="name"
             item-value="code"
@@ -165,18 +165,37 @@ export default {
   },
   data: function () {
     return {
-      carrierType: null,
-      firstName: null,
-      lastName: null,
-      sex: null,
-      citizenshipCountry: null,
-      dateOfEntry: new Date().toISOString().substr(0, 10),
-      dateOfEntryDialogVisible: false,
-      dateOfBirth: null,
-      dateOfBirthDialogVisible: false,
-      identityDocumentType: null,
-      identityDocumentNumber: null,
-      email: null,
+      transportDetails: {
+        carrierType: null,
+        dateOfEntry: new Date().toISOString().substr(0, 10),
+        dateOfEntryDialogVisible: false,
+      },
+      passengers: [
+        {
+          id: 1,
+          firstName: null,
+          lastName: null,
+          sex: null,
+          citizenshipCountry: null,
+          dateOfBirth: null,
+          dateOfBirthDialogVisible: false,
+          identityDocumentType: null,
+          identityDocumentNumber: null,
+          email: null,
+        },
+        {
+          id: 2,
+          firstName: null,
+          lastName: null,
+          sex: null,
+          citizenshipCountry: null,
+          dateOfBirth: null,
+          dateOfBirthDialogVisible: false,
+          identityDocumentType: null,
+          identityDocumentNumber: null,
+          email: null,
+        }
+      ],
       carrierTypes: [
         { code: "plane", name: this.$i18n.t("travelDetails.carrierTypes.plane")},
         { code: "bus", name: this.$i18n.t("travelDetails.carrierTypes.bus")},
@@ -209,8 +228,7 @@ export default {
   padding: 0;
   margin: 0;
   @include media(">=phone") {
-    width: 50%;
-    padding: 40px;
+    padding: 10px 40px 40px 40px;
   }
 
   h1 {

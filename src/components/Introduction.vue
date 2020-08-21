@@ -33,8 +33,12 @@ export default {
     font-size: em(30);
   }
 
+  p {
+    text-align: justify;
+  }
+
   .buttons {
-    margin-top: 40px;
+    margin-top: 25px;
     @include media(">=phone") {
       display: flex;
     }
