@@ -41,21 +41,25 @@
   },
   "lookups": {
     "carrierTypes": {
-      "plane": "Lidmašīna",
-      "bus": "Autobuss",
-      "train": "Vilciens",
-      "ferry": "Prāmis",
-      "other": "Cits"
+      "plane": "Plane",
+      "bus": "Bus",
+      "train": "Train",
+      "ferry": "Ferry",
+      "other": "Other"
     },
     "sexTypes": {
-      "male": "Vīrietis",
-      "female": "Sieviete",
-      "other": "Cits"
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
     },
     "identityDocumentTypes": {
-      "passport": "Pase",
-      "nationalIdCard": "Nacionālā ID karte",
-      "other": "Cits"
+      "passport": "Passport",
+      "nationalIdCard": "National ID Card",
+      "other": "Other"
+    },
+    "countries": {
+      "lv": "Latvia",
+      "zz": "Other"
     }
   }
 }

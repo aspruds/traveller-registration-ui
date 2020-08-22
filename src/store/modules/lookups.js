@@ -15,8 +15,8 @@ export default {
       { code: "other", name: i18n.t("lookups.sexTypes.other")},
     ],
     countries: [
-      { code: "lv", name: "Latvia"},
-      { code: "zz", name: "Other"}
+      { code: "lv", name: i18n.t("lookups.countries.lv")},
+      { code: "zz", name: i18n.t("lookups.countries.zz")}
     ],
     identityDocumentTypes: [
       { code: "passport", name: i18n.t("lookups.identityDocumentTypes.passport")},

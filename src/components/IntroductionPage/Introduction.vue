@@ -3,7 +3,11 @@
     <h1>{{ $t('introduction.title') }}</h1>
     <div class="rules" v-html="$t('introduction.rules')"></div>
     <div class="controls">
-      <v-checkbox @change="setAgreedToRules" :input-value="agreedToRules" :label="$t('introduction.agreeToRules')"></v-checkbox>
+      <v-checkbox
+          @change="setAgreedToRules"
+          :input-value="agreedToRules"
+          :label="$t('introduction.agreeToRules')">
+      </v-checkbox>
       <div class="buttons">
         <v-btn :disabled="!agreedToRules" class="button" @click="showTravelDetails()" color="primary">
           {{ $t('forms.buttons.start') }}

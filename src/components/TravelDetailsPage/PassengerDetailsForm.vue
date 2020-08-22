@@ -8,17 +8,16 @@
             :value="pax.firstName"
             @change="setFirstName({'id': pax.id, value: $event})"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
-            single-line
         ></v-text-field>
         <v-text-field
             :label="$t('travelDetails.passengerDetails.lastName')"
             :value="pax.lastName"
             @change="setLastName({'id': pax.id, value: $event})"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
-            single-line
         ></v-text-field>
         <v-select
-            v-model="pax.sex"
+            :value="pax.sex"
+            @change="setSex({'id': pax.id, value: $event})"
             :items="sexTypes"
             item-text="name"
             item-value="code"
@@ -27,7 +26,8 @@
             required
         ></v-select>
         <v-select
-            v-model="pax.citizenshipCountry"
+            :value="pax.citizenship"
+            @change="setCitizenship({'id': pax.id, value: $event})"
             :items="countries"
             item-text="name"
             item-value="code"
@@ -36,40 +36,42 @@
             required
         ></v-select>
         <v-text-field
-            v-if="pax.citizenshipCountry === 'lv'"
+            :value="pax.nationalId"
+            @change="setNationalId({'id': pax.id, value: $event})"
+            v-if="pax.citizenship === 'lv'"
             :label="$t('travelDetails.passengerDetails.nationalId')"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
-            single-line
         ></v-text-field>
         <v-dialog
             ref="dateOfBirthDialog"
-            v-model="pax.dateOfBirthDialogVisible"
-            :return-value.sync="pax.dateOfBirth"
+            v-model="dateOfBirthDialogVisible"
+            :return-value.sync="dateOfBirth"
             persistent
             width="290px"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
-                v-model="pax.dateOfBirth"
+                :value="dateOfBirth"
                 :label="$t('travelDetails.passengerDetails.dateOfBirth')"
                 readonly
                 v-bind="attrs"
                 v-on="on"
             ></v-text-field>
           </template>
-          <v-date-picker :locale="$i18n.locale" v-model="pax.dateOfBirth" scrollable>
+          <v-date-picker :locale="$i18n.locale" v-model="dateOfBirth" scrollable>
             <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="pax.dateOfBirthDialogVisible = false">
+            <v-btn text color="primary" @click="dateOfBirthDialogVisible = false">
               {{ $t('forms.buttons.cancel') }}
             </v-btn>
-            <v-btn text color="primary" @click="$refs.dateOfBirthDialog.save(pax.dateOfBirth)">
+            <v-btn text color="primary" @click="$refs.dateOfBirthDialog.save(dateOfBirth)">
               {{ $t('forms.buttons.confirm') }}
             </v-btn>
           </v-date-picker>
         </v-dialog>
         <v-divider></v-divider>
         <v-select
-            v-model="pax.identityDocumentType"
+            :value="pax.identityDocumentType"
+            @change="setIdentityDocumentType({'id': pax.id, value: $event})"
             :items="identityDocumentTypes"
             item-text="name"
             item-value="code"
@@ -78,19 +80,23 @@
             required
         ></v-select>
         <v-text-field
+            :value="pax.identityDocumentNumber"
+            @change="setIdentityDocumentNumber({'id': pax.id, value: $event})"
             :label="$t('travelDetails.passengerDetails.identityDocumentNumber')"
-            single-line
             :rules="[v => !!v || $t('forms.fieldRequired')]"
         ></v-text-field>
         <v-divider></v-divider>
         <v-container class="d-flex pa-0">
           <v-text-field
+              :value="pax.phoneCountryCode"
+              @change="setPhoneCountryCode({'id': pax.id, value: $event})"
               class="pe-8 flex-grow-0"
               :label="$t('travelDetails.passengerDetails.phoneCountryCode')"
-              single-line
               :rules="[v => !!v || $t('forms.fieldRequired')]"
           ></v-text-field>
           <v-text-field
+              :value="pax.phoneNumber"
+              @change="setPhoneNumber({'id': pax.id, value: $event})"
               class="flex-grow-1"
               :label="$t('travelDetails.passengerDetails.phoneNumber')"
               single-line
@@ -98,8 +104,9 @@
           ></v-text-field>
         </v-container>
         <v-text-field
+            :value="pax.email"
+            @change="setEmail({'id': pax.id, value: $event})"
             :label="$t('travelDetails.passengerDetails.email')"
-            single-line
             :rules="[v => !!v || $t('forms.fieldRequired')]"
         ></v-text-field>
       </v-card-text>
@@ -113,13 +120,37 @@ import {mapMutations, mapState} from 'vuex'
 export default {
   name: 'PassengerDetails',
   props: ['title', 'pax'],
+  data: function () {
+    return {
+      dateOfBirthDialogVisible: false
+    }
+  },
   methods: {
     ...mapMutations('travelDetails/passengers', [
       'setFirstName',
       'setLastName',
+      'setSex',
+      'setCitizenship',
+      'setNationalId',
+      'setDateOfBirth',
+      'setIdentityDocumentType',
+      'setIdentityDocumentNumber',
+      'setPhoneNumber',
+      'setPhoneCountryCode',
+      'setEmail',
     ]),
   },
   computed: {
+    dateOfBirth: {
+      get: function() {
+        return this.pax.dateOfBirth;
+      },
+      set: function(value) {
+        if(this.pax.dateOfEntry != value) {
+          this.setDateOfBirth({'id': this.pax.id, value: value});
+        }
+      }
+    },
     ...mapState('lookups', ['sexTypes','identityDocumentTypes', 'countries'])
   }
 }

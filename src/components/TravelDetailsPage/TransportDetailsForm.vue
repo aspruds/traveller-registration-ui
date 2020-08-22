@@ -19,7 +19,6 @@
             v-if="transportDetails.carrierType === 'plane'"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
             :label="$t('travelDetails.transportDetails.flightNumber')"
-            single-line
         ></v-text-field>
         <v-dialog
             ref="dateOfEntryDialog"

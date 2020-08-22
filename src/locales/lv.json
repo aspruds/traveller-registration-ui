@@ -56,6 +56,10 @@
       "passport": "Pase",
       "nationalIdCard": "Nacionālā ID karte",
       "other": "Cits"
+    },
+    "countries": {
+      "lv": "Latvija",
+      "zz": "Cita"
     }
   }
 }
