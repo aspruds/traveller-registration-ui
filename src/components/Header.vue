@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <header>
-      <img class="logo" alt="Gerbonis" src="@/assets/images/gerbonis.png"/>
+      <a @click="onLogoClicked"><img class="logo" alt="Gerbonis" src="@/assets/images/gerbonis.png"/></a>
       <div class="title-container">
         <h1>
           {{ $t('header.title') }}
@@ -16,7 +16,14 @@
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  methods: {
+    onLogoClicked: function() {
+      if (this.$route.name !== 'IntroPage') {
+        this.$router.push({ name: 'IntroPage' })
+      }
+    }
+  }
 }
 </script>
 
@@ -36,6 +43,10 @@ header {
   @include media(">=phone") {
     width: 60%;
     padding: 8px 0 8px 36px;
+  }
+
+  a {
+    line-height: 0;
   }
 
   img.logo {

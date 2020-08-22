@@ -2,7 +2,7 @@
   <div class="travel-details-page">
     <h1>{{ $t('travelDetails.pageTitle')}}</h1>
 
-    <v-card class="elevation-3 form-block mx-auto">
+    <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
       <v-card-title>{{ $t('travelDetails.subtitles.carrierDetails') }}</v-card-title>
       <v-card-text>
         <v-select
@@ -45,7 +45,7 @@
         </v-card-text>
     </v-card>
 
-    <v-card class="elevation-3 form-block" v-for="pax in passengers" v-bind:key="pax.id">
+    <v-card class="form-block" v-for="pax in passengers" v-bind:key="pax.id">
       <v-card-title>{{ $t('travelDetails.subtitles.passengerDetails') }}</v-card-title>
       <v-card-text>
         <v-text-field
@@ -232,12 +232,15 @@ export default {
   }
 
   h1 {
-    margin: 0 0 12px 0;
+    margin: 6px 0 12px 12px;
     font-size: em(30);
   }
 
   .form-block {
     margin-bottom: 15px;
+    &.v-sheet {
+      background: $color-form-block-bg;
+    }
   }
 
   .buttons {
