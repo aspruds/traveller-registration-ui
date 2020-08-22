@@ -1,0 +1,1 @@
+export const SET_AGREED_TO_RULES = 'SET_AGREED_TO_RULES'

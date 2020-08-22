@@ -3,15 +3,18 @@
     <h1>{{ $t('introduction.title') }}</h1>
     <div class="rules" v-html="$t('introduction.rules')"></div>
     <div class="controls">
-      <v-checkbox v-model="agreedToTerms" :label="$t('introduction.agreeToRules')"></v-checkbox>
+      <v-checkbox @change="setAgreedToRules" :input-value="agreedToRules" :label="$t('introduction.agreeToRules')"></v-checkbox>
       <div class="buttons">
-        <v-btn :disabled="!agreedToTerms" class="button" @click="showTravelDetails()" color="primary">{{ $t('introduction.startButton') }}</v-btn>
+        <v-btn :disabled="!agreedToRules" class="button" @click="showTravelDetails()" color="primary">{{ $t('introduction.startButton') }}</v-btn>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { mapMutations } from 'vuex'
+import {SET_AGREED_TO_RULES} from '@/store/mutation-types'
 export default {
   name: 'Introduction',
   methods: {
@@ -19,13 +22,17 @@ export default {
       if (this.$route.name !== 'TravelDetailsPage') {
         this.$router.push({ name: 'TravelDetailsPage' })
       }
+    },
+    ...mapMutations('introduction', [
+      SET_AGREED_TO_RULES,
+    ]),
+    setAgreedToRules: function(value){
+      this[SET_AGREED_TO_RULES](value)
     }
   },
-  data: function () {
-    return {
-      'agreedToTerms': false
-    }
-  }
+  computed: mapState('introduction', [
+    'agreedToRules'
+  ])
 }
 </script>
 
