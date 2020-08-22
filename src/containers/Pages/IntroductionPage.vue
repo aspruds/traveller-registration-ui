@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
-import Introduction from '@/components/Introduction.vue'
+import LanguageSwitcher from '@/components/IntroductionPage/LanguageSwitcher.vue'
+import Introduction from '@/components/IntroductionPage/Introduction.vue'
 
 export default {
-  name: 'IntroPage',
+  name: 'IntroductionPage',
   components: {
     LanguageSwitcher,
     Introduction

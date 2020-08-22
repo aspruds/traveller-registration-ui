@@ -1,19 +1,14 @@
 <template>
   <div class="departed-countries-page">
     <h1>Departed Countries Page</h1>
-    <Button @click="showSummary" :title="$t('travelDetails.continueButton')"/>
-    <Button @click="showTravelDetails" :title="$t('travelDetails.returnButton')"/>
+    <v-btn @click="showSummary">{{ $t('travelDetails.continueButton') }}</v-btn>
+    <v-btn @click="showTravelDetails">{{ $t('travelDetails.returnButton') }}</v-btn>
   </div>
 </template>
 
 <script>
-import Button from "@/components/Button";
-
 export default {
   name: 'DepartedCountriesPage',
-  components: {
-    Button
-  },
   methods: {
     showSummary() {
       if (this.$route.name !== 'SummaryPage') {

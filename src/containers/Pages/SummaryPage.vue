@@ -1,18 +1,14 @@
 <template>
   <div class="summary-page">
     <h1>Summary</h1>
-    <Button @click="showConfirmation" :title="$t('travelDetails.continueButton')"/>
-    <Button @click="showDepartedCountries" :title="$t('travelDetails.returnButton')"/>
+    <v-btn @click="showConfirmation" :title="$t('travelDetails.continueButton')"/>
+    <v-btn @click="showDepartedCountries" :title="$t('travelDetails.returnButton')"/>
   </div>
 </template>
 
 <script>
-import Button from "@/components/Button";
 export default {
   name: 'SummaryPage',
-  components: {
-    Button
-  },
   methods: {
     showConfirmation() {
       if (this.$route.name !== 'ConfirmationPage') {

@@ -1,3 +1,61 @@
 {
-  "message": "hello i18n !!"
+  "forms": {
+    "buttons": {
+      "cancel": "Cancel",
+      "confirm": "OK",
+      "start": "Start",
+      "continue": "Continue",
+      "return": "Return"
+    },
+    "fieldRequired": "This field is required"
+  },
+  "introduction": {
+    "title": "Questionnaire to be Filled in by Persons Entering Latvia Using Services of International Carriers",
+    "rules": "<p>Prior to the arrival in the Republic of Latvia, a person who enters the country by using services of international carriers must confirm in writing that upon arrival in Latvia, the epidemiological safety measures established in the country will be observed. In the statement the person must indicate his or her name, surname, personal identification code, contact telephone number and the address of the actual place of residence where the person can be reached, as well as the countries and dates of departure in which the person has stayed during the last 14 days before the arrival in Latvia.</p>\n<p>If the person has stayed in a country that is subject to the special precautionary and restrictive measures, published on the website of the Centre for Disease Prevention and Control (SPKC), he/she must declare that he/she will take the special precautionary measures, including self-isolation.</p>\n<p>If the arrival of a foreign national in Latvia is necessary for the fulfilment of obligations of Latvian merchants, then this person must confirm in writing that while staying in Latvia, he/she will ensure self-isolation outside the working hours, monitor his/her health condition and observe the special precautionary measures.</p>\n<p>If the person has stayed in a country that is not subject to the precautionary and restrictive measures, the person does not have to comply with the special precautionary measures.</p>\n<p>The relevant carrier is responsible for handing over the completed statement to the State Border Guard and SPKC as soon as possible.</p>\n<p>Questionnaires of persons who have stayed in a country (published on the SPKC website), which is subject to the special precautionary and restrictive measures, must be submitted to the State Border Guard.</p>\n<p>The remaining questionnaires must be submitted to the SPKC.</p>\n<p>The responsible authority must store the statements for one month.</p>",
+    "agreeToRules": "I confirm that information given in this form is true and correct, as well I’m informed that the processing of personal data is being carried out in accordance to points (e) and (d) of Article 6(1) of REGULATION (EU) 2016/679 OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation), with a purpose – protection of the vital interests of society."
+  },
+  "travelDetails": {
+    "pageTitle": "Declaration",
+    "subtitles": {
+      "carrierDetails": "Carrier Details",
+      "passengerDetails": "Passenger Details"
+    },
+    "transportDetails":{
+      "carrierType":"Carrier type",
+      "flightNumber":"Flight number",
+      "dateOfEntry":"Date of Entry"
+    },
+    "passengerDetails":{
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "sex": "Sex",
+      "phoneCountryCode": "Phone Country Code",
+      "phoneNumber": "Phone Number",
+      "email": "Email",
+      "citizenship": "Citizenship",
+      "nationalId": "National ID Number",
+      "dateOfBirth": "Date of Birth",
+      "identityDocumentType": "Identity Document Type",
+      "identityDocumentNumber": "Identity Document Number"
+    }
+  },
+  "lookups": {
+    "carrierTypes": {
+      "plane": "Lidmašīna",
+      "bus": "Autobuss",
+      "train": "Vilciens",
+      "ferry": "Prāmis",
+      "other": "Cits"
+    },
+    "sexTypes": {
+      "male": "Vīrietis",
+      "female": "Sieviete",
+      "other": "Cits"
+    },
+    "identityDocumentTypes": {
+      "passport": "Pase",
+      "nationalIdCard": "Nacionālā ID karte",
+      "other": "Cits"
+    }
+  }
 }

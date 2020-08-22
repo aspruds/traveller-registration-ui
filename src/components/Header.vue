@@ -19,8 +19,8 @@ export default {
   name: 'Header',
   methods: {
     onLogoClicked: function() {
-      if (this.$route.name !== 'IntroPage') {
-        this.$router.push({ name: 'IntroPage' })
+      if (this.$route.name !== 'IntroductionPage') {
+        this.$router.push({ name: 'IntroductionPage' })
       }
     }
   }

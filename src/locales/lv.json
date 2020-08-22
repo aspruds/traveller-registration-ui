@@ -1,3 +1,61 @@
 {
-  "message": "hello i18n !!"
+  "forms": {
+    "buttons": {
+      "cancel": "Atcelt",
+      "confirm": "Apstiprināt",
+      "start": "Sākt",
+      "continue": "Turpināt",
+      "return": "Atgriezties"
+    },
+    "fieldRequired": "Obligāts lauks"
+  },
+  "introduction": {
+    "title": "Anketa, kuru aizpilda persona, kas ieceļo Latvijā, izmantojot starptautisko pārvadātāju pakalpojumus",
+    "rules": "<p>Pirms ierašanās Latvijas Republikā persona, kura ieceļo, izmantojot starptautisko pārvadātāju pakalpojumus, rakstiski apliecina, ka, ierodoties Latvijā, ievēros valstī noteiktos epidemioloģiskās drošības pasākumus. Apliecinājumā persona norāda savu vārdu, uzvārdu, personas kodu, kontakttālruni saziņai un faktiskās dzīvesvietas adresi, kurā būs sasniedzama, kā arī valstis un izbraukšanas datumus, kurās uzturējusies pēdējo 14 dienu laikā pirms ierašanās Latvijā.</p>\n<p>Ja persona ir uzturējusies valstī, kas ir Slimību profilakses un kontroles centra (SPKC) tīmekļvietnē publicētā valsts, uz kuru ir attiecināmi īpašie piesardzības un ierobežojošie pasākumi, tā apliecina, ka ievēros īpašus piesardzības pasākumus, tai skaitā nodrošinās pašizolāciju.</p>\n<p>Ja ārvalstnieka ierašanās Latvijā nepieciešama Latvijas komersantu saistību izpildei, tad šī persona rakstiski apliecina, ka, uzturoties Latvijā, ārpus darba laika nodrošinās pašizolāciju, novēros savu veselības stāvokli un ievēros īpašus piesardzības pasākumus.</p>\n<p>Ja persona uzturējusies valstī, uz kuru nav attiecināmi piesardzības un ierobežojošie pasākumi, personai nav jāievēro īpašie piesardzības pasākumi.</p>\n<p>Attiecīgais pārvadātājs ir atbildīgs par aizpildīta personas apliecinājuma iespējami ātru nodošanu Valsts robežsardzei un SPKC.</p>\n<p>To personu anketas, kuras uzturējušās SPKC tīmekļvietnē publicētā valstī, uz kuru attiecināmi īpašie piesardzības un ierobežojošie pasākumi, nodod Valsts robežsardzei.</p>\n<p>Pārējās anketas tiek nodotas SPKC.</p>\n<p>Atbildīgā institūcija personas apliecinājumu glabā vienu mēnesi.</p>",
+    "agreeToRules": "Esmu informēts (-ta), ka saskaņā ar Eiropas Parlamenta un Padomes 2016.gada 27.aprīļa regulu (ES) 2016/679 „Par fizisku personu aizsardzību attiecībā uz personas datu apstrādi un šādu datu brīvu aprīti” 6.panta 1.punkta e) un d) apakšpunktu, tiek veikta personu datu apstrāde. Mērķis - sabiedrības vitālo interešu aizsardzība."
+  },
+  "travelDetails": {
+    "pageTitle": "Apliecinājums",
+    "subtitles": {
+      "carrierDetails": "Pārvadātāja dati",
+      "passengerDetails": "Pasažieru dati"
+    },
+    "transportDetails":{
+      "carrierType":"Pārvadātāja veids",
+      "flightNumber":"Lidojuma numurs",
+      "dateOfEntry":"Ieceļošanas datums"
+    },
+    "passengerDetails":{
+      "firstName": "Vārds",
+      "lastName": "Uzvārds",
+      "sex": "Dzimums",
+      "phoneCountryCode": "Tālruņa valsts kods",
+      "phoneNumber": "Tālrunis",
+      "email": "E-pasts",
+      "citizenship": "Pilsonība",
+      "nationalId": "Personas kods",
+      "dateOfBirth": "Dzimšanas datums",
+      "identityDocumentType": "Identifikācijas dokumenta tips",
+      "identityDocumentNumber": "Identifikācijas dokumenta numurs"
+    }
+  },
+  "lookups": {
+    "carrierTypes": {
+      "plane": "Lidmašīna",
+      "bus": "Autobuss",
+      "train": "Vilciens",
+      "ferry": "Prāmis",
+      "other": "Cits"
+    },
+    "sexTypes": {
+      "male": "Vīrietis",
+      "female": "Sieviete",
+      "other": "Cits"
+    },
+    "identityDocumentTypes": {
+      "passport": "Pase",
+      "nationalIdCard": "Nacionālā ID karte",
+      "other": "Cits"
+    }
+  }
 }
