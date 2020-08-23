@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import introduction  from './modules/introduction'
-import travelDetails  from './modules/travel-details'
+import registration  from './modules/registration'
 import lookups  from './modules/lookups'
 Vue.use(Vuex)
 
@@ -14,7 +14,7 @@ export default new Vuex.Store({
   },
   modules: {
     'introduction': introduction,
-    'travelDetails': travelDetails,
+    'registration': registration,
     'lookups': lookups
   }
 })

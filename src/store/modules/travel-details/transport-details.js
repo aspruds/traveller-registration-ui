@@ -1,10 +1,12 @@
+import {TransportDetails} from "@/models/TransportDetails";
+
 export default {
   namespaced: true,
-  state: {
-    carrierType: 'plane',
-    flightNumber: 'BT101',
-    dateOfEntry: new Date().toISOString().substr(0, 10),
-  },
+  state: new TransportDetails({
+    carrierType: "plane",
+    flightNumber: "BT101",
+    dateOfEntry: new Date().toISOString().substr(0, 10)
+  }),
   mutations: {
     setCarrierType(state, value) {
       state.carrierType = value
@@ -16,8 +18,6 @@ export default {
       state.dateOfEntry = value
     },
   },
-  actions: {
-  },
-  modules: {
-  }
+  actions: {},
+  modules: {}
 }

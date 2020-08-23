@@ -126,7 +126,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('travelDetails/passengers', [
+    ...mapMutations('registration/passengers', [
       'setFirstName',
       'setLastName',
       'setSex',

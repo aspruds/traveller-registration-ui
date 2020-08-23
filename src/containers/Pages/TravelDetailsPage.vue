@@ -43,7 +43,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('travelDetails', ['passengers']),
+    ...mapState('registration', ['passengers']),
   },
 }
 </script>

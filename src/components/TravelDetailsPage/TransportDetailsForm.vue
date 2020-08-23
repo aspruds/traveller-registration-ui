@@ -63,7 +63,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('travelDetails/transportDetails', [
+    ...mapMutations('registration/transportDetails', [
       'setCarrierType',
       'setFlightNumber',
       'setDateOfEntry',
@@ -75,12 +75,12 @@ export default {
         return this.transportDetails.dateOfEntry;
       },
       set: function(value) {
-        if(this.transportDetails.dateOfEntry != value) {
+        if(this.transportDetails.dateOfEntry !== value) {
           this.setDateOfEntry(value);
         }
       }
     },
-    ...mapState('travelDetails', ['transportDetails']),
+    ...mapState('registration', ['transportDetails']),
     ...mapState('lookups', ['carrierTypes']),
   }
 }
