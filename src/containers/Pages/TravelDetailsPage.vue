@@ -2,11 +2,11 @@
   <div class="travel-details-page">
     <h1>{{ $t('travelDetails.pageTitle')}}</h1>
 
-    <TransportDetails :title="$t('travelDetails.subtitles.carrierDetails')"/>
-    <PassengerDetails :title="$t('travelDetails.subtitles.passengerDetails')"
-                      :pax="pax"
-                      v-for="pax in passengers"
-                      v-bind:key="pax.id"></PassengerDetails>
+    <TransportDetailsForm :title="$t('travelDetails.subtitles.carrierDetails')"/>
+    <TravellerDetailsForm :title="$t('travelDetails.subtitles.passengerDetails')"
+                          :travellerId="travellerId"
+                          v-for="travellerId in travellerIds"
+                          :key="travellerId"></TravellerDetailsForm>
 
     <div class="buttons">
       <v-btn class="button" @click="showDepartedCountries" color="primary">
@@ -20,15 +20,20 @@
 </template>
 
 <script>
-import TransportDetails from "@/components/TravelDetailsPage/TransportDetailsForm";
+import TransportDetailsForm from "@/components/TravelDetailsPage/TransportDetailsForm";
+import TravellerDetailsForm from "@/components/TravelDetailsPage/TravellerDetailsForm";
+
+import store from '@/store/index';
+import { registration } from '@/store/modules/registration';
 import {mapState} from "vuex";
-import PassengerDetails from "@/components/TravelDetailsPage/PassengerDetailsForm";
+
+if (!store.state.registration) store.registerModule(`registration`, registration);
 
 export default {
   name: 'TravelDetailsPage',
   components: {
-    PassengerDetails,
-    TransportDetails
+    TravellerDetailsForm,
+    TransportDetailsForm
   },
   methods: {
     showIntroduction() {
@@ -43,7 +48,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('registration', ['passengers']),
+    ...mapState('registration/traveller', ['travellerIds']),
   },
 }
 </script>

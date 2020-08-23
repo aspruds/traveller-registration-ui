@@ -24,10 +24,7 @@ export default {
       { code: "other", name: i18n.t("lookups.identityDocumentTypes.other")}
     ],
   },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
+  mutations: {},
+  actions: {},
+  modules: {}
 }

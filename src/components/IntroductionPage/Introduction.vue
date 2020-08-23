@@ -4,8 +4,7 @@
     <div class="rules" v-html="$t('introduction.rules')"></div>
     <div class="controls">
       <v-checkbox
-          @change="setAgreedToRules"
-          :input-value="agreedToRules"
+          v-model="agreedToRules"
           :label="$t('introduction.agreeToRules')">
       </v-checkbox>
       <div class="buttons">
@@ -18,8 +17,17 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import { mapMutations } from 'vuex'
+import {createHelpers} from "vuex-map-fields";
+import store from '@/store/index';
+import { introduction } from '@/store/modules/introduction';
+
+if (!store.state.introduction) store.registerModule(`introduction`, introduction);
+
+const { mapFields } = createHelpers({
+  getterType: 'introduction/getField',
+  mutationType: 'introduction/updateField',
+});
+
 export default {
   name: 'Introduction',
   methods: {
@@ -28,13 +36,10 @@ export default {
         this.$router.push({ name: 'TravelDetailsPage' })
       }
     },
-    ...mapMutations('introduction', [
-      'setAgreedToRules',
-    ]),
   },
-  computed: mapState('introduction', [
-    'agreedToRules'
-  ])
+  computed: {
+    ...mapFields(['agreedToRules']),
+  },
 }
 </script>
 

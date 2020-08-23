@@ -4,7 +4,8 @@
       <v-card-title>{{ title }}</v-card-title>
       <v-card-text>
         <v-select
-            v-model="carrierType"
+            :value="carrierType"
+            @change="setCarrierType"
             :items="carrierTypes"
             item-text="name"
             item-value="code"
@@ -13,7 +14,8 @@
             required
         ></v-select>
         <v-text-field
-            v-model="flightNumber"
+            :value="flightNumber"
+            @change="setFlightNumber"
             v-if="carrierType === 'plane'"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
             :label="$t('travelDetails.transportDetails.flightNumber')"
@@ -50,22 +52,34 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
-import { createHelpers } from 'vuex-map-fields';
-
-const { mapFields } = createHelpers({
-  getterType: 'registration/transportDetails/getField',
-  mutationType: 'registration/transportDetails/updateField',
-});
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: 'TransportDetails',
   props: ['title'],
-  data: () => ({
-    dateOfEntryDialogVisible: false
-  }),
+  data: function () {
+    return {
+      dateOfEntryDialogVisible: false
+    }
+  },
+  methods: {
+    ...mapMutations('registration/transportDetail', [
+      'setCarrierType',
+      'setFlightNumber',
+      'setDateOfEntry',
+    ]),
+  },
   computed: {
-    ...mapFields(['carrierType', 'flightNumber', 'dateOfEntry']),
+    dateOfEntry: {
+      get() {
+        return this.dateOfEntryGetter;
+      },
+      set(value) {
+        this.setDateOfEntry(value);
+      }
+    },
+    ...mapState('registration/transportDetail', ['carrierType','flightNumber']),
+    ...mapState('registration/transportDetail', {dateOfEntryGetter: 'dateOfEntry'}),
     ...mapState('lookups', ['carrierTypes']),
   }
 }

@@ -1,13 +1,18 @@
-import transportDetails from "@/store/modules/travel-details/transport-details";
-import passengers from "@/store/modules/travel-details/passengers";
+import transportDetail from "@/store/modules/travel-details/transport-detail";
+import traveller from "@/store/modules/travel-details/traveller";
 
-export default {
+const state = () => ({
+  error: false,
+  success: false
+});
+
+const modules = {
+  transportDetail,
+  traveller
+};
+
+export const registration = {
   namespaced: true,
-  state: {},
-  mutations: {},
-  actions: {},
-  modules: {
-    transportDetails: transportDetails,
-    passengers: passengers,
-  }
-}
+  state,
+  modules
+};

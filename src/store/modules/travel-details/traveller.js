@@ -1,3 +1,43 @@
+import {ContactInformation} from "@/models/ContactInformation";
+import {Traveller} from "@/models/Traveller";
+import {IdentityDocument} from "@/models/IdentityDocument";
+
+const state = function (){
+    return {
+        travellerIds: ['1','2'],
+        travellers: {
+            '1': new Traveller({
+                id: 1,
+                firstName: "Johans",
+                contactInformation: new ContactInformation({
+                    email: "some@inbox.lu"
+                }),
+                identityDocument: new IdentityDocument({})
+            }),
+            '2': new Traveller({
+                id: 2,
+                firstName: "Juha",
+                contactInformation: new ContactInformation({}),
+                identityDocument: new IdentityDocument({})
+            })
+        }
+    };
+};
+
+const mutations = {
+    setEmail(state, {id, value}) {
+        state.travellers[id].email = value;
+    }
+};
+
+export default {
+    namespaced: true,
+    state,
+    mutations
+}
+
+
+/*
 export default {
     namespaced: true,
     state: [
@@ -35,20 +75,6 @@ export default {
                   dateOfExit: "2020-02-02"
                 },
             ]
-        },
-        {
-            id: "dedba6de-ba9e-415a-a796-ae55feeb8bba",
-            firstName: null,
-            lastName: null,
-            sex: null,
-            citizenship: null,
-            nationalId: null,
-            dateOfBirth: null,
-            identityDocumentType: null,
-            identityDocumentNumber: null,
-            phoneCountryCode: null,
-            phoneNumber: null,
-            email: null
         }
     ],
     mutations: {
@@ -100,3 +126,4 @@ export default {
     actions: {},
     modules: {}
 }
+*/
