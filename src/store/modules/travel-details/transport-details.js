@@ -1,5 +1,7 @@
 import {TransportDetails} from "@/models/TransportDetails";
 
+import { getField, updateField } from 'vuex-map-fields';
+
 export default {
   namespaced: true,
   state: new TransportDetails({
@@ -7,16 +9,11 @@ export default {
     flightNumber: "BT101",
     dateOfEntry: new Date().toISOString().substr(0, 10)
   }),
+  getters: {
+    getField,
+  },
   mutations: {
-    setCarrierType(state, value) {
-      state.carrierType = value
-    },
-    setFlightNumber(state, value) {
-      state.flightNumber = value
-    },
-    setDateOfEntry(state, value) {
-      state.dateOfEntry = value
-    },
+    updateField,
   },
   actions: {},
   modules: {}

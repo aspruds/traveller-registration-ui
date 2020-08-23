@@ -4,8 +4,7 @@
       <v-card-title>{{ title }}</v-card-title>
       <v-card-text>
         <v-select
-            :value="transportDetails.carrierType"
-            @change="setCarrierType"
+            v-model="carrierType"
             :items="carrierTypes"
             item-text="name"
             item-value="code"
@@ -14,9 +13,8 @@
             required
         ></v-select>
         <v-text-field
-            :value="transportDetails.flightNumber"
-            @change="setFlightNumber"
-            v-if="transportDetails.carrierType === 'plane'"
+            v-model="flightNumber"
+            v-if="carrierType === 'plane'"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
             :label="$t('travelDetails.transportDetails.flightNumber')"
         ></v-text-field>
@@ -29,7 +27,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
-                :value="dateOfEntry"
+                v-model="dateOfEntry"
                 :label="$t('travelDetails.transportDetails.dateOfEntry')"
                 readonly
                 v-bind="attrs"
@@ -52,35 +50,22 @@
 </template>
 
 <script>
-import {mapMutations, mapState} from 'vuex'
+import {mapState} from 'vuex'
+import { createHelpers } from 'vuex-map-fields';
+
+const { mapFields } = createHelpers({
+  getterType: 'registration/transportDetails/getField',
+  mutationType: 'registration/transportDetails/updateField',
+});
 
 export default {
   name: 'TransportDetails',
   props: ['title'],
-  data: function () {
-    return {
-      dateOfEntryDialogVisible: false
-    }
-  },
-  methods: {
-    ...mapMutations('registration/transportDetails', [
-      'setCarrierType',
-      'setFlightNumber',
-      'setDateOfEntry',
-    ]),
-  },
+  data: () => ({
+    dateOfEntryDialogVisible: false
+  }),
   computed: {
-    dateOfEntry: {
-      get: function() {
-        return this.transportDetails.dateOfEntry;
-      },
-      set: function(value) {
-        if(this.transportDetails.dateOfEntry !== value) {
-          this.setDateOfEntry(value);
-        }
-      }
-    },
-    ...mapState('registration', ['transportDetails']),
+    ...mapFields(['carrierType', 'flightNumber', 'dateOfEntry']),
     ...mapState('lookups', ['carrierTypes']),
   }
 }
