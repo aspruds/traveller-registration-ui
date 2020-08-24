@@ -1,10 +1,6 @@
-import {TransportDetails} from "@/models/TransportDetails";
+import {createTransportDetails} from "@/models/TransportDetails";
 
-const state = () => new TransportDetails({
-    carrierType: "plane",
-    flightNumber: "BT104",
-    dateOfEntry: new Date().toISOString().substr(0, 10)
-});
+const state = () => createTransportDetails();
 
 const mutations = {
     setCarrierType (state, value) {

@@ -1,32 +1,54 @@
-import {ContactInformation} from "@/models/ContactInformation";
-import {Traveller} from "@/models/Traveller";
-import {IdentityDocument} from "@/models/IdentityDocument";
+import {createTraveller} from "@/models/Traveller";
+import { v4 as uuidv4 } from 'uuid';
+
+const addTraveler = function (state) {
+    const id = uuidv4();
+    state.travellers = state.travellers || {};
+    console.log(state.travellers)
+    state.travellers[id] = createTraveller(id);
+
+    state.travellerIds = state.travellerIds || [];
+    state.travellerIds.push(id);
+    return state;
+};
 
 const state = function (){
-    return {
-        travellerIds: ['1','2'],
-        travellers: {
-            '1': new Traveller({
-                id: 1,
-                firstName: "Johans",
-                contactInformation: new ContactInformation({
-                    email: "some@inbox.lu"
-                }),
-                identityDocument: new IdentityDocument({})
-            }),
-            '2': new Traveller({
-                id: 2,
-                firstName: "Juha",
-                contactInformation: new ContactInformation({}),
-                identityDocument: new IdentityDocument({})
-            })
-        }
-    };
+    return addTraveler({});
 };
 
 const mutations = {
+    setFirstName(state, {id, value}) {
+        state.travellers[id].firstName = value;
+    },
+    setLastName(state, {id, value}) {
+        state.travellers[id].lastName = value;
+    },
+    setSex(state, {id, value}) {
+        state.travellers[id].sex = value;
+    },
+    setCitizenship(state, {id, value}) {
+        state.travellers[id].citizenship = value;
+    },
+    setNationalId(state, {id, value}) {
+        state.travellers[id].nationalId = value;
+    },
+    setDateOfBirth(state, {id, value}) {
+        state.travellers[id].dateOfBirth = value;
+    },
+    setIdentityDocumentType(state, {id, value}) {
+        state.travellers[id].identityDocument.documentType = value;
+    },
+    setIdentityDocumentNumber(state, {id, value}) {
+        state.travellers[id].identityDocument.documentNumber = value;
+    },
+    setPhoneCountryCode(state, {id, value}) {
+        state.travellers[id].contactInformation.phoneCountryCode = value;
+    },
+    setPhoneNumber(state, {id, value}) {
+        state.travellers[id].contactInformation.phoneNumber = value;
+    },
     setEmail(state, {id, value}) {
-        state.travellers[id].email = value;
+        state.travellers[id].contactInformation.email = value;
     }
 };
 

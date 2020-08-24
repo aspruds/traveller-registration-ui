@@ -4,17 +4,20 @@
       <v-card-title>{{ title }}</v-card-title>
       <v-card-text>
         <v-text-field
-            v-model="traveller.firstName"
+            :value="traveller.firstName"
+            @change="setFirstName({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.firstName')"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
         ></v-text-field>
         <v-text-field
-            v-model="traveller.lastName"
+            :value="traveller.lastName"
+            @change="setLastName({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.lastName')"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
         ></v-text-field>
         <v-select
-            v-model="traveller.sex"
+            :value="traveller.sex"
+            @change="setSex({ id: travellerId, value: $event })"
             :items="sexTypes"
             :label="$t('travelDetails.passengerDetails.sex')"
             item-text="name"
@@ -23,7 +26,8 @@
             required
         ></v-select>
         <v-select
-            v-model="traveller.citizenship"
+            :value="traveller.citizenship"
+            @change="setCitizenship({ id: travellerId, value: $event })"
             :items="countries"
             :label="$t('travelDetails.passengerDetails.citizenship')"
             item-text="name"
@@ -32,7 +36,8 @@
             required
         ></v-select>
         <v-text-field
-            v-model="traveller.nationalId"
+            :value="traveller.nationalId"
+            @change="setNationalId({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.nationalId')"
             v-if="traveller.citizenship === 'lv'"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
@@ -65,7 +70,8 @@
         </v-dialog>
         <v-divider></v-divider>
         <v-select
-            v-model="traveller.identityDocument.documentType"
+            :value="traveller.identityDocument.documentType"
+            @change="setIdentityDocumentType({ id: travellerId, value: $event })"
             :items="identityDocumentTypes"
             item-text="name"
             item-value="code"
@@ -74,20 +80,23 @@
             required
         ></v-select>
         <v-text-field
-            v-model="traveller.identityDocument.documentNumber"
+            :value="traveller.identityDocument.documentNumber"
+            @change="setIdentityDocumentNumber({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.identityDocumentNumber')"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
         ></v-text-field>
         <v-divider></v-divider>
         <v-container class="d-flex pa-0">
           <v-text-field
-              v-model="traveller.contactInformation.phoneCountryCode"
+              :value="traveller.contactInformation.phoneCountryCode"
+              @change="setPhoneCountryCode({ id: travellerId, value: $event })"
               class="pe-8 flex-grow-0"
               :label="$t('travelDetails.passengerDetails.phoneCountryCode')"
               :rules="[v => !!v || $t('forms.fieldRequired')]"
           ></v-text-field>
           <v-text-field
-              v-model="traveller.contactInformation.phoneNumber"
+              :value="traveller.contactInformation.phoneNumber"
+              @change="setPhoneNumber({ id: travellerId, value: $event })"
               class="flex-grow-1"
               :label="$t('travelDetails.passengerDetails.phoneNumber')"
               single-line
@@ -95,7 +104,7 @@
           ></v-text-field>
         </v-container>
         <v-text-field
-            v-model="traveller.contactInformation.email"
+            :value="traveller.contactInformation.email"
             @change="setEmail({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.email')"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
@@ -117,11 +126,31 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('registration/traveller', ['setEmail'])
+    ...mapMutations('registration/traveller', [
+        'setFirstName',
+        'setLastName',
+        'setSex',
+        'setCitizenship',
+        'setNationalId',
+        'setDateOfBirth',
+        'setIdentityDocumentType',
+        'setIdentityDocumentNumber',
+        'setPhoneCountryCode',
+        'setPhoneNumber',
+        'setEmail',
+    ])
   },
   computed: {
     traveller(){
       return this.travellers[this.travellerId]
+    },
+    dateOfBirth: {
+      get() {
+        return this.traveller.dateOfBirth;
+      },
+      set(value) {
+        this.setDateOfBirth(value);
+      }
     },
     ...mapState('registration/traveller', ['travellers']),
     ...mapState('lookups', ['sexTypes','identityDocumentTypes', 'countries'])
