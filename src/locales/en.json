@@ -37,6 +37,10 @@
       "dateOfBirth": "Date of Birth",
       "identityDocumentType": "Identity Document Type",
       "identityDocumentNumber": "Identity Document Number"
+    },
+    "phone": {
+      "addPhone": "Add Phone",
+      "removePhone": "Remove Phone"
     }
   },
   "lookups": {

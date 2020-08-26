@@ -68,7 +68,6 @@
             </v-btn>
           </v-date-picker>
         </v-dialog>
-        <v-divider></v-divider>
         <v-select
             :value="traveller.identityDocument.documentType"
             @change="setIdentityDocumentType({ id: travellerId, value: $event })"
@@ -85,41 +84,37 @@
             :label="$t('travelDetails.passengerDetails.identityDocumentNumber')"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
         ></v-text-field>
-        <v-divider></v-divider>
-        <v-container class="d-flex pa-0">
-          <v-text-field
-              :value="traveller.contactInformation.phoneCountryCode"
-              @change="setPhoneCountryCode({ id: travellerId, value: $event })"
-              class="pe-8 flex-grow-0"
-              :label="$t('travelDetails.passengerDetails.phoneCountryCode')"
-              :rules="[v => !!v || $t('forms.fieldRequired')]"
-          ></v-text-field>
-          <v-text-field
-              :value="traveller.contactInformation.phoneNumber"
-              @change="setPhoneNumber({ id: travellerId, value: $event })"
-              class="flex-grow-1"
-              :label="$t('travelDetails.passengerDetails.phoneNumber')"
-              single-line
-              :rules="[v => !!v || $t('forms.fieldRequired')]"
-          ></v-text-field>
-        </v-container>
         <v-text-field
             :value="traveller.contactInformation.email"
             @change="setEmail({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.email')"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
         ></v-text-field>
+        <div class="phones">
+          <Phone
+              v-for="(phone, key, index) in phones"
+              :key="phone.id"
+              :travellerId="travellerId"
+              :phone="phone"
+              :val="Object.keys(phones).length - 1"
+              :lastItem="index == Object.keys(phones).length - 1"
+          ></Phone>
+        </div>
       </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import {mapState, mapMutations, mapGetters} from 'vuex'
+import Phone from "@/components/TravelDetailsPage/Phone";
 
 export default {
   name: 'TravellerDetailsForm',
   props: ['title', 'travellerId'],
+  components: {
+    Phone
+  },
   data: function () {
     return {
       dateOfBirthDialogVisible: false
@@ -135,14 +130,21 @@ export default {
         'setDateOfBirth',
         'setIdentityDocumentType',
         'setIdentityDocumentNumber',
-        'setPhoneCountryCode',
-        'setPhoneNumber',
         'setEmail',
     ])
   },
   computed: {
+    ...mapGetters('registration/traveller', ['travellerById']),
     traveller(){
-      return this.travellers[this.travellerId]
+      return this.travellerById(this.travellerId);
+    },
+    phones(){
+      let phoneIds = this.traveller().contactInformation.phones;
+      return phoneIds.map(id => this.phones[id]);
+    },
+    addresses(){
+      let addressIds = this.traveller().contactInformation.addresses;
+      return addressIds.map(id => this.addresses[id]);
     },
     dateOfBirth: {
       get() {
@@ -153,6 +155,8 @@ export default {
       }
     },
     ...mapState('registration/traveller', ['travellers']),
+    ...mapState('registration/traveller', ['phones']),
+    ...mapState('registration/traveller', ['addresses']),
     ...mapState('lookups', ['sexTypes','identityDocumentTypes', 'countries'])
   }
 }

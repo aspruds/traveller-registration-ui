@@ -37,6 +37,10 @@
       "dateOfBirth": "Dzimšanas datums",
       "identityDocumentType": "Identifikācijas dokumenta tips",
       "identityDocumentNumber": "Identifikācijas dokumenta numurs"
+    },
+    "phone": {
+      "addPhone": "Pievienot tālruņa numuru",
+      "removePhone": "Dzēst tālruņa numuru"
     }
   },
   "lookups": {

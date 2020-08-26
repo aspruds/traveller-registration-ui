@@ -1,5 +1,5 @@
 import transportDetail from "@/store/modules/travel-details/transport-detail";
-import traveller from "@/store/modules/travel-details/traveller";
+import traveller from "@/store/modules/travel-details/traveller.js";
 
 const state = () => ({
   error: false,

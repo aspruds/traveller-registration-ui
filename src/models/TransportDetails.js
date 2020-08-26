@@ -1,7 +1,15 @@
-export function createTransportDetails() {
-    return {
-        carrierType: "plane",
-        flightNumber: "BT104",
-        dateOfEntry: new Date().toISOString().substr(0, 10)
+export class TransportDetails {
+    constructor({
+                    carrierType = '',
+                    flightNumber =  '',
+                    dateOfEntry = ''
+                } = {}) {
+        this.carrierType = carrierType;
+        this.flightNumber = flightNumber;
+        this.dateOfEntry = dateOfEntry;
     }
+}
+
+export function createTransportDetails(data) {
+    return Object.freeze(new TransportDetails(data));
 }

@@ -1,6 +1,6 @@
-import {createTransportDetails} from "@/models/TransportDetails";
+import {TransportDetails} from "@/models/TransportDetails";
 
-const state = () => createTransportDetails();
+const state = () => new TransportDetails();
 
 const mutations = {
     setCarrierType (state, value) {
