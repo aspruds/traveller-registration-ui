@@ -91,30 +91,36 @@
             :label="$t('travelDetails.passengerDetails.email')"
             :rules="[v => !!v || $t('forms.fieldRequired')]"
         ></v-text-field>
-        <div class="phones">
-          <Phone
-              v-for="(phone, key, index) in phones"
-              :key="phone.id"
-              :travellerId="travellerId"
-              :phone="phone"
-              :onlyItem="Object.keys(phones).length == 1"
-              :val="Object.keys(phones).length - 1"
-              :firstItem="index == 0"
-              :lastItem="index == Object.keys(phones).length - 1"
-          ></Phone>
-        </div>
-        <div class="addresses">
-          <Address
-              v-for="(address, key, index) in addresses"
-              :key="address.id"
-              :travellerId="travellerId"
-              :address="address"
-              :val="Object.keys(addresses).length - 1"
-              :onlyItem="Object.keys(addresses).length == 1"
-              :firstItem="index == 0"
-              :lastItem="index == Object.keys(addresses).length - 1"
-          ></Address>
-        </div>
+      </v-card-text>
+    </v-card>
+    <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
+      <v-card-title>{{ $t('travelDetails.phone.title') }}</v-card-title>
+      <v-card-text>
+        <Phone
+            v-for="(phone, key, index) in phones"
+            :key="phone.id"
+            :travellerId="travellerId"
+            :phone="phone"
+            :onlyItem="Object.keys(phones).length == 1"
+            :val="Object.keys(phones).length - 1"
+            :firstItem="index == 0"
+            :lastItem="index == Object.keys(phones).length - 1"
+        ></Phone>
+      </v-card-text>
+    </v-card>
+    <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
+      <v-card-title>{{ $t('travelDetails.address.title') }}</v-card-title>
+      <v-card-text>
+        <Address
+            v-for="(address, key, index) in addresses"
+            :key="address.id"
+            :travellerId="travellerId"
+            :address="address"
+            :val="Object.keys(addresses).length - 1"
+            :onlyItem="Object.keys(addresses).length == 1"
+            :firstItem="index == 0"
+            :lastItem="index == Object.keys(addresses).length - 1"
+        ></Address>
       </v-card-text>
     </v-card>
   </div>

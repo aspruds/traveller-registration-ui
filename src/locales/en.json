@@ -40,10 +40,12 @@
       "identityDocumentNumber": "Identity Document Number"
     },
     "phone": {
+      "title": "Phone",
       "addPhone": "Add Another Phone",
       "removePhone": "Remove Phone"
     },
     "address": {
+      "title": "Address",
       "country": "Country",
       "zip": "Zip Code",
       "province": "County",

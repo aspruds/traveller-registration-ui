@@ -18,7 +18,7 @@
     "pageTitle": "Apliecinājums",
     "subtitles": {
       "carrierDetails": "Pārvadātāja dati",
-      "passengerDetails": "Pasažieru dati"
+      "passengerDetails": "Pasažiera dati"
     },
     "transportDetails":{
       "carrierType":"Pārvadātāja veids",
@@ -40,10 +40,12 @@
       "identityDocumentNumber": "Identifikācijas dokumenta numurs"
     },
     "phone": {
+      "title": "Tālrunis",
       "addPhone": "Pievienot papildus tālruņa numuru",
       "removePhone": "Dzēst tālruņa numuru"
     },
     "address": {
+      "title": "Adrese",
       "country": "Valsts",
       "zip": "Pasta indekss",
       "province": "Novads",
