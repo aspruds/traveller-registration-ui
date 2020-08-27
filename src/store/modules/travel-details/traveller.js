@@ -80,14 +80,14 @@ const mutations = {
     setIdentityDocumentNumber(state, {id, value}) {
         state.travellers[id].identityDocument.documentNumber = value;
     },
+    setEmail(state, {id, value}) {
+        state.travellers[id].contactInformation.email = value;
+    },
     setPhoneCountryCode(state, {id, value}) {
         state.phones[id].phoneCountryCode = value;
     },
     setPhoneNumber(state, {id, value}) {
         state.phones[id].phoneNumber = value;
-    },
-    setEmail(state, {id, value}) {
-        state.travellers[id].contactInformation.email = value;
     },
     addPhone(state, travellerId) {
         addPhone(state, travellerId);
@@ -96,7 +96,42 @@ const mutations = {
         let contactInfo = state.travellers[travellerId].contactInformation;
         contactInfo.phones = contactInfo.phones.filter(v => v !== id)
         Vue.delete(state.phones, id);
-    }
+    },
+    setCountry(state, {id, value}) {
+        state.addresses[id].countryCode = value;
+    },
+    setZip(state, {id, value}) {
+        state.addresses[id].zip = value;
+    },
+    setProvince(state, {id, value}) {
+        state.addresses[id].province = value;
+    },
+    setCity(state, {id, value}) {
+        state.addresses[id].city = value;
+    },
+    setDistrict(state, {id, value}) {
+        state.addresses[id].district = value;
+    },
+    setVillage(state, {id, value}) {
+        state.addresses[id].village = value;
+    },
+    setStreet(state, {id, value}) {
+        state.addresses[id].street = value;
+    },
+    setHouse(state, {id, value}) {
+        state.addresses[id].house = value;
+    },
+    setFlat(state, {id, value}) {
+        state.addresses[id].flat = value;
+    },
+    addAddress(state, travellerId) {
+        addAddress(state, travellerId);
+    },
+    deleteAddress(state, {travellerId, id}) {
+        let contactInfo = state.travellers[travellerId].contactInformation;
+        contactInfo.addresses = contactInfo.addresses.filter(v => v !== id)
+        Vue.delete(state.addresses, id);
+    },
 };
 
 const getters = {

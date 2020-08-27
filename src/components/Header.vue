@@ -82,9 +82,6 @@ header {
     }
   }
 }
-
-
-
 </style>
 
 <i18n>

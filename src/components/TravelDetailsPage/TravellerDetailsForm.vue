@@ -37,6 +37,7 @@
         ></v-select>
         <v-text-field
             :value="traveller.nationalId"
+            :hint="$t('travelDetails.passengerDetails.nationalIdHint')"
             @change="setNationalId({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.nationalId')"
             v-if="traveller.citizenship === 'lv'"
@@ -96,9 +97,23 @@
               :key="phone.id"
               :travellerId="travellerId"
               :phone="phone"
+              :onlyItem="Object.keys(phones).length == 1"
               :val="Object.keys(phones).length - 1"
+              :firstItem="index == 0"
               :lastItem="index == Object.keys(phones).length - 1"
           ></Phone>
+        </div>
+        <div class="addresses">
+          <Address
+              v-for="(address, key, index) in addresses"
+              :key="address.id"
+              :travellerId="travellerId"
+              :address="address"
+              :val="Object.keys(addresses).length - 1"
+              :onlyItem="Object.keys(addresses).length == 1"
+              :firstItem="index == 0"
+              :lastItem="index == Object.keys(addresses).length - 1"
+          ></Address>
         </div>
       </v-card-text>
     </v-card>
@@ -108,11 +123,13 @@
 <script>
 import {mapState, mapMutations, mapGetters} from 'vuex'
 import Phone from "@/components/TravelDetailsPage/Phone";
+import Address from "@/components/TravelDetailsPage/Address";
 
 export default {
   name: 'TravellerDetailsForm',
   props: ['title', 'travellerId'],
   components: {
+    Address,
     Phone
   },
   data: function () {

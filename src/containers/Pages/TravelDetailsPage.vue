@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss" scoped>
 @import '@/assets/styles/common.scss';
 
 .travel-details-page {
@@ -68,7 +68,7 @@ export default {
     font-size: em(30);
   }
 
-  .form-block {
+  ::v-deep .form-block {
     margin-bottom: 15px;
     &.v-sheet {
       background: $color-form-block-bg;

@@ -34,13 +34,27 @@
       "email": "E-pasts",
       "citizenship": "Pilsonība",
       "nationalId": "Personas kods",
+      "nationalIdHint": "Piemēram: XXXXXX-XXXXX",
       "dateOfBirth": "Dzimšanas datums",
       "identityDocumentType": "Identifikācijas dokumenta tips",
       "identityDocumentNumber": "Identifikācijas dokumenta numurs"
     },
     "phone": {
-      "addPhone": "Pievienot tālruņa numuru",
+      "addPhone": "Pievienot papildus tālruņa numuru",
       "removePhone": "Dzēst tālruņa numuru"
+    },
+    "address": {
+      "country": "Valsts",
+      "zip": "Pasta indekss",
+      "province": "Novads",
+      "city": "Pilsēta",
+      "district": "Rajons",
+      "village": "Ciems",
+      "street": "Iela",
+      "house": "Ēkas numurs/Nosaukums, korpuss",
+      "flat": "Telpu grupa/dzīvoklis",
+      "addAddress": "Pievienot papildus adresi",
+      "removeAddress": "Dzēst adresi"
     }
   },
   "lookups": {

@@ -34,13 +34,27 @@
       "email": "Email",
       "citizenship": "Citizenship",
       "nationalId": "National ID Number",
+      "nationalIdHint": "Example: XXXXXX-XXXXX",
       "dateOfBirth": "Date of Birth",
       "identityDocumentType": "Identity Document Type",
       "identityDocumentNumber": "Identity Document Number"
     },
     "phone": {
-      "addPhone": "Add Phone",
+      "addPhone": "Add Another Phone",
       "removePhone": "Remove Phone"
+    },
+    "address": {
+      "country": "Country",
+      "zip": "Zip Code",
+      "province": "County",
+      "city": "City",
+      "district": "Civil parish",
+      "village": "Village",
+      "street": "Street",
+      "house": "Building Number/Name, corps",
+      "flat": "Group of Premises/Apartment",
+      "addAddress": "Add Another Address",
+      "removeAddress": "Remove Address"
     }
   },
   "lookups": {
