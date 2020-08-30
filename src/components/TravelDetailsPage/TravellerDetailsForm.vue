@@ -7,13 +7,13 @@
             :value="traveller.firstName"
             @change="setFirstName({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.firstName')"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules="[fieldRequired]"
         ></v-text-field>
         <v-text-field
             :value="traveller.lastName"
             @change="setLastName({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.lastName')"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules="[fieldRequired]"
         ></v-text-field>
         <v-select
             :value="traveller.sex"
@@ -22,7 +22,7 @@
             :label="$t('travelDetails.passengerDetails.sex')"
             item-text="name"
             item-value="code"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules="[fieldRequired]"
             required
         ></v-select>
         <v-select
@@ -32,7 +32,7 @@
             :label="$t('travelDetails.passengerDetails.citizenship')"
             item-text="name"
             item-value="code"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules="[fieldRequired]"
             required
         ></v-select>
         <v-text-field
@@ -41,7 +41,7 @@
             @change="setNationalId({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.nationalId')"
             v-if="traveller.citizenship === 'lv'"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules="[fieldRequired, nationalIdNumberRequired]"
         ></v-text-field>
         <v-dialog
             ref="dateOfBirthDialog"
@@ -54,6 +54,7 @@
             <v-text-field
                 v-model="traveller.dateOfBirth"
                 :label="$t('travelDetails.passengerDetails.dateOfBirth')"
+                :rules="[fieldRequired]"
                 readonly
                 v-bind="attrs"
                 v-on="on"
@@ -75,7 +76,7 @@
             :items="identityDocumentTypes"
             item-text="name"
             item-value="code"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules="[fieldRequired]"
             :label="$t('travelDetails.passengerDetails.identityDocumentType')"
             required
         ></v-select>
@@ -83,13 +84,13 @@
             :value="traveller.identityDocument.documentNumber"
             @change="setIdentityDocumentNumber({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.identityDocumentNumber')"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules="[fieldRequired]"
         ></v-text-field>
         <v-text-field
             :value="traveller.contactInformation.email"
             @change="setEmail({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.email')"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules="[fieldRequired, emailRequired]"
         ></v-text-field>
       </v-card-text>
     </v-card>
@@ -130,10 +131,14 @@
 import {mapState, mapMutations, mapGetters} from 'vuex'
 import Phone from "@/components/TravelDetailsPage/Phone";
 import Address from "@/components/TravelDetailsPage/Address";
+import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
+import emailRequiredMixin from "@/utils/validations/EmailRequiredMixin";
+import nationalIdNumberRequiredMixin from "@/utils/validations/NationalIdNumberRequiredMixin";
 
 export default {
   name: 'TravellerDetailsForm',
   props: ['title', 'travellerId'],
+  mixins: [fieldRequiredMixin, emailRequiredMixin, nationalIdNumberRequiredMixin],
   components: {
     Address,
     Phone

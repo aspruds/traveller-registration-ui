@@ -1,27 +1,26 @@
 <template>
   <div class="phone">
-    <v-container class="pa-0">
+    <v-container class="pa-0 d-flex">
       <v-text-field
           :value="phone.phoneCountryCode"
           @change="setPhoneCountryCode({ id: phone.id, value: $event })"
           class="pe-8 flex-grow-0"
           :label="$t('travelDetails.passengerDetails.phoneCountryCode')"
-          :rules="[v => !!v || $t('forms.fieldRequired')]"
+          :rules="[fieldRequired]"
       ></v-text-field>
       <v-text-field
           :value="phone.phoneNumber"
           @change="setPhoneNumber({ id: phone.id, value: $event })"
           class="flex-grow-1"
           :label="$t('travelDetails.passengerDetails.phoneNumber')"
-          single-line
-          :rules="[v => !!v || $t('forms.fieldRequired')]"
+          :rules="[fieldRequired]"
       ></v-text-field>
     </v-container>
     <div class="buttons">
-      <v-btn class="button" v-if="lastItem" x-small color="secondary" @click="addPhone(travellerId)">
+      <v-btn class="button" v-if="lastItem" small color="secondary" @click="addPhone(travellerId)">
         {{ $t('travelDetails.phone.addPhone') }}
       </v-btn>
-      <v-btn class="button" v-if="!onlyItem" x-small color="warning" @click="deletePhone({ travellerId: travellerId, id: phone.id })">
+      <v-btn class="button" v-if="!onlyItem" small color="warning" @click="deletePhone({ travellerId: travellerId, id: phone.id })">
         {{ $t('travelDetails.phone.removePhone') }}
       </v-btn>
     </div>
@@ -30,10 +29,12 @@
 
 <script>
 import {mapState, mapMutations} from 'vuex'
+import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
 
 export default {
   name: 'Phone',
   props: ['travellerId', 'phone', 'firstItem', 'lastItem', 'onlyItem'],
+  mixins: [fieldRequiredMixin],
   methods: {
     ...mapMutations('registration/traveller', [
         'setPhoneCountryCode',

@@ -7,7 +7,11 @@
       "continue": "Continue",
       "return": "Return"
     },
-    "fieldRequired": "This field is required"
+    "validators": {
+      "fieldRequired": "This field is required",
+      "emailRequired": "Please enter email in format xx@xx.xx",
+      "nationalIdNumberRequired": "Please enter national id in format xxxxxx-xxxxx"
+    }
   },
   "introduction": {
     "title": "Questionnaire to be Filled in by Persons Entering Latvia Using Services of International Carriers",
@@ -34,7 +38,7 @@
       "email": "Email",
       "citizenship": "Citizenship",
       "nationalId": "National ID Number",
-      "nationalIdHint": "Example: XXXXXX-XXXXX",
+      "nationalIdHint": "Format: XXXXXX-XXXXX",
       "dateOfBirth": "Date of Birth",
       "identityDocumentType": "Identity Document Type",
       "identityDocumentNumber": "Identity Document Number"

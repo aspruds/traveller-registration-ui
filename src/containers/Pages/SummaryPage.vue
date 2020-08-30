@@ -7,18 +7,17 @@
 </template>
 
 <script>
+import {CONFIRMATION_PAGE, DEPARTED_COUNTRIES_PAGE} from "@/utils/router/routes";
+import {pushRoute} from "@/utils/router/router-utils";
+
 export default {
   name: 'SummaryPage',
   methods: {
     showConfirmation() {
-      if (this.$route.name !== 'ConfirmationPage') {
-        this.$router.push({ name: 'ConfirmationPage' })
-      }
+      pushRoute(this.$router, this.$route, CONFIRMATION_PAGE)
     },
     showDepartedCountries() {
-      if (this.$route.name !== 'DepartedCountriesPage') {
-        this.$router.push({ name: 'DepartedCountriesPage' })
-      }
+      pushRoute(this.$router, this.$route, DEPARTED_COUNTRIES_PAGE)
     }
   },
 }

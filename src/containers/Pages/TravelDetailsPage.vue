@@ -2,12 +2,13 @@
   <div class="travel-details-page">
     <h1>{{ $t('travelDetails.pageTitle')}}</h1>
 
+    <v-form ref="form" v-model="valid">
     <TransportDetailsForm :title="$t('travelDetails.subtitles.carrierDetails')"/>
     <TravellerDetailsForm :title="$t('travelDetails.subtitles.passengerDetails')"
                           :travellerId="travellerId"
                           v-for="travellerId in travellerIds"
                           :key="travellerId"></TravellerDetailsForm>
-
+    </v-form>
     <div class="buttons">
       <v-btn class="button" @click="showDepartedCountries" color="primary">
         {{ $t('forms.buttons.continue') }}
@@ -26,6 +27,8 @@ import TravellerDetailsForm from "@/components/TravelDetailsPage/TravellerDetail
 import store from '@/store/index';
 import { registration } from '@/store/modules/registration';
 import {mapState} from "vuex";
+import {DEPARTED_COUNTRIES_PAGE, INTRODUCTION_PAGE} from "@/utils/router/routes";
+import {pushRoute} from "@/utils/router/router-utils";
 
 if (!store.state.registration) store.registerModule(`registration`, registration);
 
@@ -35,15 +38,19 @@ export default {
     TravellerDetailsForm,
     TransportDetailsForm
   },
+  data: function() {
+    return {
+      valid: true
+    }
+  },
   methods: {
     showIntroduction() {
-      if (this.$route.name !== 'IntroductionPage') {
-        this.$router.push({ name: 'IntroductionPage' })
-      }
+      pushRoute(this.$router, this.$route, INTRODUCTION_PAGE)
     },
     showDepartedCountries() {
-      if (this.$route.name !== 'DepartedCountriesPage') {
-        this.$router.push({ name: 'DepartedCountriesPage' })
+      this.$refs.form.validate();
+      if(this.valid) {
+        pushRoute(this.$router, this.$route, DEPARTED_COUNTRIES_PAGE)
       }
     }
   },

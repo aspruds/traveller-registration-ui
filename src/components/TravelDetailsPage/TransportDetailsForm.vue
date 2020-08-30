@@ -9,7 +9,7 @@
             :items="carrierTypes"
             item-text="name"
             item-value="code"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules=" [fieldRequired]"
             :label="$t('travelDetails.transportDetails.carrierType')"
             required
         ></v-select>
@@ -17,7 +17,7 @@
             :value="flightNumber"
             @change="setFlightNumber"
             v-if="carrierType === 'plane'"
-            :rules="[v => !!v || $t('forms.fieldRequired')]"
+            :rules="[fieldRequired]"
             :label="$t('travelDetails.transportDetails.flightNumber')"
         ></v-text-field>
         <v-dialog
@@ -30,13 +30,18 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
                 v-model="dateOfEntry"
+                :rules="[fieldRequired]"
                 :label="$t('travelDetails.transportDetails.dateOfEntry')"
                 readonly
                 v-bind="attrs"
                 v-on="on"
             ></v-text-field>
           </template>
-          <v-date-picker ref="dateOfEntryDatePicker" :locale="$i18n.locale" v-model="dateOfEntry" scrollable>
+          <v-date-picker
+              ref="dateOfEntryDatePicker"
+              :locale="$i18n.locale"
+              v-model="dateOfEntry"
+              scrollable>
             <v-spacer></v-spacer>
             <v-btn text color="primary" @click="dateOfEntryDialogVisible = false">
               {{ $t('forms.buttons.cancel') }}
@@ -53,10 +58,12 @@
 
 <script>
 import {mapState, mapMutations} from 'vuex'
+import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
 
 export default {
   name: 'TransportDetails',
   props: ['title'],
+  mixins: [fieldRequiredMixin],
   data: function () {
     return {
       dateOfEntryDialogVisible: false

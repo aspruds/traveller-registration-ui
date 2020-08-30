@@ -7,7 +7,11 @@
       "continue": "Turpināt",
       "return": "Atgriezties"
     },
-    "fieldRequired": "Obligāts lauks"
+    "validators": {
+      "fieldRequired": "Obligāts lauks",
+      "emailRequired": "Nepieciešama e-pasta adrese formā xx@xx.xx",
+      "nationalIdNumberRequired": "Lūdzu ievadiet personas kodu formātā xxxxxx-xxxxx"
+    }
   },
   "introduction": {
     "title": "Anketa, kuru aizpilda persona, kas ieceļo Latvijā, izmantojot starptautisko pārvadātāju pakalpojumus",
@@ -34,7 +38,7 @@
       "email": "E-pasts",
       "citizenship": "Pilsonība",
       "nationalId": "Personas kods",
-      "nationalIdHint": "Piemēram: XXXXXX-XXXXX",
+      "nationalIdHint": "Formāts: XXXXXX-XXXXX",
       "dateOfBirth": "Dzimšanas datums",
       "identityDocumentType": "Identifikācijas dokumenta tips",
       "identityDocumentNumber": "Identifikācijas dokumenta numurs"

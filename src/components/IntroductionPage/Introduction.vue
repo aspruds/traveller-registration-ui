@@ -20,6 +20,8 @@
 import {createHelpers} from "vuex-map-fields";
 import store from '@/store/index';
 import { introduction } from '@/store/modules/introduction';
+import {TRAVEL_DETAILS_PAGE} from "@/utils/router/routes";
+import {pushRoute} from "@/utils/router/router-utils";
 
 if (!store.state.introduction) store.registerModule(`introduction`, introduction);
 
@@ -32,9 +34,7 @@ export default {
   name: 'Introduction',
   methods: {
     showTravelDetails() {
-      if (this.$route.name !== 'TravelDetailsPage') {
-        this.$router.push({ name: 'TravelDetailsPage' })
-      }
+      pushRoute(this.$router, this.$route, TRAVEL_DETAILS_PAGE)
     },
   },
   computed: {

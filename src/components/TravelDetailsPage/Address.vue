@@ -7,62 +7,62 @@
         :label="$t('travelDetails.address.country')"
         item-text="name"
         item-value="code"
-        :rules="[v => !!v || $t('forms.fieldRequired')]"
+        :rules="[fieldRequired]"
         required
     ></v-select>
     <v-text-field
         :value="address.zip"
         @change="setZip({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.zip')"
-        :rules="[v => !!v || $t('forms.fieldRequired')]"
+        :rules="[fieldRequired]"
     ></v-text-field>
     <v-text-field
         :value="address.province"
         @change="setProvince({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.province')"
-        :rules="[v => !!v || $t('forms.fieldRequired')]"
+        :rules="[fieldRequired]"
     ></v-text-field>
     <v-text-field
         :value="address.city"
         @change="setCity({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.city')"
-        :rules="[v => !!v || $t('forms.fieldRequired')]"
+        :rules="[fieldRequired]"
     ></v-text-field>
     <v-text-field
         :value="address.district"
         @change="setDistrict({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.district')"
-        :rules="[v => !!v || $t('forms.fieldRequired')]"
+        :rules="[fieldRequired]"
     ></v-text-field>
     <v-text-field
         :value="address.village"
         @change="setVillage({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.village')"
-        :rules="[v => !!v || $t('forms.fieldRequired')]"
+        :rules="[fieldRequired]"
     ></v-text-field>
     <v-text-field
         :value="address.street"
         @change="setStreet({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.street')"
-        :rules="[v => !!v || $t('forms.fieldRequired')]"
+        :rules="[fieldRequired]"
     ></v-text-field>
     <v-text-field
         :value="address.house"
         @change="setHouse({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.house')"
-        :rules="[v => !!v || $t('forms.fieldRequired')]"
+        :rules="[fieldRequired]"
     ></v-text-field>
     <v-text-field
         :value="address.flat"
         @change="setFlat({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.flat')"
-        :rules="[v => !!v || $t('forms.fieldRequired')]"
+        :rules="[fieldRequired]"
     ></v-text-field>
     <div class="buttons">
-      <v-btn class="button" v-if="lastItem" x-small color="secondary" @click="addAddress(travellerId)">
+      <v-btn class="button" v-if="lastItem" small color="secondary" @click="addAddress(travellerId)">
         {{ $t('travelDetails.address.addAddress') }}
       </v-btn>
-      <v-btn class="button" v-if="!onlyItem" x-small color="warning" @click="deleteAddress({ travellerId: travellerId, id: address.id })">
+      <v-btn class="button" v-if="!onlyItem" small color="warning" @click="deleteAddress({ travellerId: travellerId, id: address.id })">
         {{ $t('travelDetails.address.removeAddress') }}
       </v-btn>
     </div>
@@ -71,10 +71,12 @@
 
 <script>
 import {mapState, mapMutations} from 'vuex'
+import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
 
 export default {
   name: 'Address',
   props: ['travellerId', 'address', 'firstItem', 'lastItem', 'onlyItem'],
+  mixins: [fieldRequiredMixin],
   methods: {
     ...mapMutations('registration/traveller', [
         'setCountry',

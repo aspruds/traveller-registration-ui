@@ -7,18 +7,17 @@
 </template>
 
 <script>
+import {SUMMARY_PAGE, TRAVEL_DETAILS_PAGE} from "@/utils/router/routes";
+import {pushRoute} from "@/utils/router/router-utils";
+
 export default {
   name: 'DepartedCountriesPage',
   methods: {
     showSummary() {
-      if (this.$route.name !== 'SummaryPage') {
-        this.$router.push({name: 'SummaryPage'})
-      }
+      pushRoute(this.$router, this.$route, SUMMARY_PAGE)
     },
     showTravelDetails() {
-      if (this.$route.name !== 'TravelDetailsPage') {
-        this.$router.push({name: 'TravelDetailsPage'})
-      }
+      pushRoute(this.$router, this.$route, TRAVEL_DETAILS_PAGE)
     }
   }
 }
