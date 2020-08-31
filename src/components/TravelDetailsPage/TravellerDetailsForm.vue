@@ -114,8 +114,8 @@
             :key="phone.id"
             :travellerId="travellerId"
             :phone="phone"
+            :phoneIds="traveller.contactInformation.phones"
             :onlyItem="Object.keys(phones).length == 1"
-            :val="Object.keys(phones).length - 1"
             :firstItem="index == 0"
             :lastItem="index == Object.keys(phones).length - 1"
         ></Phone>
@@ -129,7 +129,7 @@
             :key="address.id"
             :travellerId="travellerId"
             :address="address"
-            :val="Object.keys(addresses).length - 1"
+            :phoneIds="traveller.contactInformation.addresses"
             :onlyItem="Object.keys(addresses).length == 1"
             :firstItem="index == 0"
             :lastItem="index == Object.keys(addresses).length - 1"
@@ -140,7 +140,7 @@
 </template>
 
 <script>
-import {mapState, mapMutations, mapGetters} from 'vuex'
+import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 import Phone from "@/components/TravelDetailsPage/Phone";
 import Address from "@/components/TravelDetailsPage/Address";
 import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
@@ -165,6 +165,9 @@ export default {
       val && setTimeout(() => (this.$refs.dateOfBirthPicker.activePicker = 'YEAR'))
     },
   },
+  mounted() {
+    this.initialize(this.travellerId)
+  },
   methods: {
     ...mapMutations('registration/traveller', [
         'setFirstName',
@@ -177,7 +180,8 @@ export default {
         'setIdentityDocumentNumber',
         'setEmail',
         'setSeat',
-    ])
+    ]),
+    ...mapActions('registration/traveller', ['initialize'])
   },
   computed: {
     ...mapGetters('registration/traveller', ['travellerById']),

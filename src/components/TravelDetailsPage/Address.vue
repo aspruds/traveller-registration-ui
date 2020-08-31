@@ -62,7 +62,7 @@
       <v-btn class="button" v-if="lastItem" small color="secondary" @click="addAddress(travellerId)">
         {{ $t('travelDetails.address.addAddress') }}
       </v-btn>
-      <v-btn class="button" v-if="!onlyItem" small color="warning" @click="deleteAddress({ travellerId: travellerId, id: address.id })">
+      <v-btn class="button" v-if="!onlyItem" small color="warning" @click="deleteAddress({ travellerId: travellerId, addressId: address.id })">
         {{ $t('travelDetails.address.removeAddress') }}
       </v-btn>
     </div>
@@ -70,15 +70,15 @@
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import {mapState, mapMutations, mapActions} from 'vuex'
 import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
 
 export default {
   name: 'Address',
-  props: ['travellerId', 'address', 'firstItem', 'lastItem', 'onlyItem'],
+  props: ['travellerId', 'address', 'addressIds', 'firstItem', 'lastItem', 'onlyItem'],
   mixins: [fieldRequiredMixin],
   methods: {
-    ...mapMutations('registration/traveller', [
+    ...mapMutations('registration/traveller/addresses', [
         'setCountry',
         'setZip',
         'setProvince',
@@ -90,17 +90,13 @@ export default {
         'setFlat',
         'addAddress',
         'deleteAddress',
-    ])
+    ]),
+    ...mapActions('registration/traveller', ['addAddress', 'deleteAddress'])
   },
   computed: {
-    traveller(){
-      return this.travellers[this.travellerId]
-    },
     addresses(){
-      let addressIds = this.traveller().contactInformation.addresses;
-      return addressIds.map(id => this.addresses[id]);
+      return this.addressIds.map(id => this.addresses[id]);
     },
-    ...mapState('registration/traveller', ['travellers']),
     ...mapState('registration/traveller', ['addresses']),
     ...mapState('lookups', ['countries'])
   }

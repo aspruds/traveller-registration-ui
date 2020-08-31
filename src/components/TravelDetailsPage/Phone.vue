@@ -20,7 +20,7 @@
       <v-btn class="button" v-if="lastItem" small color="secondary" @click="addPhone(travellerId)">
         {{ $t('travelDetails.phone.addPhone') }}
       </v-btn>
-      <v-btn class="button" v-if="!onlyItem" small color="warning" @click="deletePhone({ travellerId: travellerId, id: phone.id })">
+      <v-btn class="button" v-if="!onlyItem" small color="warning" @click="deletePhone({ travellerId: travellerId, phoneId: phone.id })">
         {{ $t('travelDetails.phone.removePhone') }}
       </v-btn>
     </div>
@@ -28,31 +28,25 @@
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import {mapState, mapMutations, mapActions} from 'vuex'
 import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
 
 export default {
   name: 'Phone',
-  props: ['travellerId', 'phone', 'firstItem', 'lastItem', 'onlyItem'],
+  props: ['travellerId', 'phone', 'phoneIds', 'firstItem', 'lastItem', 'onlyItem'],
   mixins: [fieldRequiredMixin],
   methods: {
-    ...mapMutations('registration/traveller', [
+    ...mapMutations('registration/traveller/phones', [
         'setPhoneCountryCode',
-        'setPhoneNumber',
-        'addPhone',
-        'deletePhone',
-    ])
+        'setPhoneNumber'
+    ]),
+    ...mapActions('registration/traveller', ['addPhone', 'deletePhone'])
   },
   computed: {
-    traveller(){
-      return this.travellers[this.travellerId]
-    },
     phones(){
-      let phoneIds = this.traveller().contactInformation.phones;
-      return phoneIds.map(id => this.phones[id]);
+      return this.phoneIds.map(id => this.phones[id]);
     },
-    ...mapState('registration/traveller', ['travellers']),
-    ...mapState('registration/traveller', ['phones']),
+    ...mapState('registration/traveller/phones', ['phones']),
   }
 }
 </script>
