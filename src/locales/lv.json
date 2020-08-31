@@ -10,7 +10,8 @@
     "validators": {
       "fieldRequired": "Obligāts lauks",
       "emailRequired": "Nepieciešama e-pasta adrese formā xx@xx.xx",
-      "nationalIdNumberRequired": "Lūdzu ievadiet personas kodu formātā xxxxxx-xxxxx"
+      "nationalIdNumberRequired": "Lūdzu ievadiet personas kodu formātā xxxxxx-xxxxx",
+      "flightNumberRequired": "Lūdzu ievadiet lidojuma numuru. Lidojuma numurs sākas ar diviem burtiem (aviosabiedrības kods), kam seko 1-4 cipari ar reisa numuru. Piemēram, BT101"
     }
   },
   "introduction": {
@@ -40,6 +41,7 @@
       "nationalId": "Personas kods",
       "nationalIdHint": "Formāts: XXXXXX-XXXXX",
       "dateOfBirth": "Dzimšanas datums",
+      "seat": "Sēdvietas vai kajītes numurs",
       "identityDocumentType": "Identifikācijas dokumenta tips",
       "identityDocumentNumber": "Identifikācijas dokumenta numurs"
     },

@@ -83,6 +83,9 @@ const mutations = {
     setEmail(state, {id, value}) {
         state.travellers[id].contactInformation.email = value;
     },
+    setSeat(state, {id, value}) {
+        state.travellers[id].seat = value;
+    },
     setPhoneCountryCode(state, {id, value}) {
         state.phones[id].phoneCountryCode = value;
     },

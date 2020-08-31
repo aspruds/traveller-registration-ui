@@ -10,6 +10,7 @@ export class Traveller {
                     citizenship = null,
                     nationalId = '',
                     dateOfBirth = null,
+                    seat = '',
                     identityDocument = new IdentityDocument(),
                     contactInformation = new ContactInformation(),
                     recentCountries = [],
@@ -21,6 +22,7 @@ export class Traveller {
         this.citizenship = citizenship;
         this.nationalId = nationalId;
         this.dateOfBirth = dateOfBirth;
+        this.seat = seat;
         this.identityDocument = identityDocument;
         this.contactInformation = contactInformation;
         this.recentCountries = recentCountries;

@@ -17,7 +17,7 @@
             :value="flightNumber"
             @change="setFlightNumber"
             v-if="carrierType === 'plane'"
-            :rules="[fieldRequired]"
+            :rules="[fieldRequired, flightNumberRequired]"
             :label="$t('travelDetails.transportDetails.flightNumber')"
         ></v-text-field>
         <v-dialog
@@ -59,11 +59,12 @@
 <script>
 import {mapState, mapMutations} from 'vuex'
 import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
+import flightNumberRequiredMixin from "@/utils/validations/FlightNumberRequiredMixin";
 
 export default {
   name: 'TransportDetails',
   props: ['title'],
-  mixins: [fieldRequiredMixin],
+  mixins: [fieldRequiredMixin, flightNumberRequiredMixin],
   data: function () {
     return {
       dateOfEntryDialogVisible: false

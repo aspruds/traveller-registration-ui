@@ -60,7 +60,13 @@
                 v-on="on"
             ></v-text-field>
           </template>
-          <v-date-picker :locale="$i18n.locale" v-model="traveller.dateOfBirth" scrollable>
+          <v-date-picker
+              :locale="$i18n.locale"
+              v-model="traveller.dateOfBirth"
+              ref="dateOfBirthPicker"
+              min="1900-01-01"
+              :max="new Date().toISOString().substr(0, 10)"
+              scrollable>
             <v-spacer></v-spacer>
             <v-btn text color="primary" @click="dateOfBirthDialogVisible = false">
               {{ $t('forms.buttons.cancel') }}
@@ -91,6 +97,12 @@
             @change="setEmail({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.email')"
             :rules="[fieldRequired, emailRequired]"
+        ></v-text-field>
+        <v-text-field
+            :value="traveller.seat"
+            @change="setSeat({ id: travellerId, value: $event })"
+            :label="$t('travelDetails.passengerDetails.seat')"
+            :rules="[fieldRequired]"
         ></v-text-field>
       </v-card-text>
     </v-card>
@@ -148,6 +160,11 @@ export default {
       dateOfBirthDialogVisible: false
     }
   },
+  watch: {
+    dateOfBirthDialogVisible (val) {
+      val && setTimeout(() => (this.$refs.dateOfBirthPicker.activePicker = 'YEAR'))
+    },
+  },
   methods: {
     ...mapMutations('registration/traveller', [
         'setFirstName',
@@ -159,6 +176,7 @@ export default {
         'setIdentityDocumentType',
         'setIdentityDocumentNumber',
         'setEmail',
+        'setSeat',
     ])
   },
   computed: {

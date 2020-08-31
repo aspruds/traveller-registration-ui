@@ -10,7 +10,8 @@
     "validators": {
       "fieldRequired": "This field is required",
       "emailRequired": "Please enter email in format xx@xx.xx",
-      "nationalIdNumberRequired": "Please enter national id in format xxxxxx-xxxxx"
+      "nationalIdNumberRequired": "Please enter national id in format xxxxxx-xxxxx",
+      "flightNumberRequired": "Please enter flight number. Flight number starts with two letter indicating airline code, followed by 1-4 digits (flight number). For example, BT101"
     }
   },
   "introduction": {
@@ -40,6 +41,7 @@
       "nationalId": "National ID Number",
       "nationalIdHint": "Format: XXXXXX-XXXXX",
       "dateOfBirth": "Date of Birth",
+      "seat": "Seat or cabin number",
       "identityDocumentType": "Identity Document Type",
       "identityDocumentNumber": "Identity Document Number"
     },
