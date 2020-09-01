@@ -4,7 +4,7 @@
     <div class="rules" v-html="$t('introduction.rules')"></div>
     <div class="controls">
       <v-checkbox
-          :value="agreedToRules"
+          :input-value="agreedToRules"
           @change="setAgreedToRules"
           :label="$t('introduction.agreeToRules')">
       </v-checkbox>

@@ -26,6 +26,9 @@ const initialState = function (){
 };
 
 const mutations = {
+    setInitialized(state, value) {
+        state.initialized = value;
+    },
     setFirstName(state, {id, value}) {
         state.travellers[id].firstName = value;
     },
@@ -122,11 +125,12 @@ const actions = {
         commit('deleteRecentCountryId', {travellerId, recentCountryId})
         commit('registration/traveller/recentCountries/deleteRecentCountry', recentCountryId, { root: true })
     },
-    initialize({dispatch, state}, travellerId) {
+    initialize({dispatch, state, commit}, travellerId) {
         if(!state.initialized) {
             dispatch('addPhone', travellerId)
             dispatch('addAddress', travellerId)
             dispatch('addRecentCountry', travellerId)
+            commit('setInitialized', true)
         }
     }
 }
