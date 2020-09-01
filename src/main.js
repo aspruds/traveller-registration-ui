@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from '@/containers/App.vue'
-import i18n from './i18n'
+import i18n from '@/plugins/i18n'
 import router from './router'// loads from src/router/index.js
 import vuetify from './plugins/vuetify';
 import store from './store'

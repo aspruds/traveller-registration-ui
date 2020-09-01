@@ -5,31 +5,31 @@ const state = () => ({})
 
 const mutations = {
     setCountry(state, {id, value}) {
-        state.addresses[id].countryCode = value;
+        state[id].countryCode = value;
     },
     setZip(state, {id, value}) {
-        state.addresses[id].zip = value;
+        state[id].zip = value;
     },
     setProvince(state, {id, value}) {
-        state.addresses[id].province = value;
+        state[id].province = value;
     },
     setCity(state, {id, value}) {
-        state.addresses[id].city = value;
+        state[id].city = value;
     },
     setDistrict(state, {id, value}) {
-        state.addresses[id].district = value;
+        state[id].district = value;
     },
     setVillage(state, {id, value}) {
-        state.addresses[id].village = value;
+        state[id].village = value;
     },
     setStreet(state, {id, value}) {
-        state.addresses[id].street = value;
+        state[id].street = value;
     },
     setHouse(state, {id, value}) {
-        state.addresses[id].house = value;
+        state[id].house = value;
     },
     setFlat(state, {id, value}) {
-        state.addresses[id].flat = value;
+        state[id].flat = value;
     },
     addAddress(state, id) {
         Vue.set(state, id, new Address({id: id}));
