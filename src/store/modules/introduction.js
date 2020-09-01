@@ -1,20 +1,15 @@
-import { getField, updateField } from 'vuex-map-fields';
-
 const state = () => ({
   agreedToRules: false
 });
 
-const getters = {
-  getField
-};
-
 const mutations = {
-  updateField
+  setAgreedToRules(state, value) {
+    state.agreedToRules = value
+  }
 };
 
 export const introduction = {
   namespaced: true,
   state,
-  getters,
   mutations
 };
