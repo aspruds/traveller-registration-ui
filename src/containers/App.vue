@@ -19,6 +19,7 @@ export default {
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
+@import '@/assets/styles/reset.scss';
 @import '@/assets/styles/common.scss';
 
 #app {

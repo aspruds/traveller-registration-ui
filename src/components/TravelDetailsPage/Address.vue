@@ -107,6 +107,7 @@ export default {
 @import '@/assets/styles/common.scss';
 
 .buttons {
+  margin-top: 5px;
   @include media(">=phone") {
     margin-left: 0;
     margin-right: 0;

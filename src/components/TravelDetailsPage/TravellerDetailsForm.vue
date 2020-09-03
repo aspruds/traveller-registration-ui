@@ -122,6 +122,22 @@
       </v-card-text>
     </v-card>
     <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
+      <v-card-title>{{ $t('travelDetails.recentCountry.title') }}</v-card-title>
+      <v-card-subtitle>{{ $t('travelDetails.recentCountry.subtitle') }}</v-card-subtitle>
+      <v-card-text>
+        <RecentCountry
+            v-for="(recentCountry, key, index) in recentCountries"
+            :key="recentCountry.id"
+            :travellerId="travellerId"
+            :recentCountry="recentCountry"
+            :recentCountryIds="traveller.recentCountries"
+            :onlyItem="Object.keys(recentCountries).length == 1"
+            :firstItem="index == 0"
+            :lastItem="index == Object.keys(recentCountries).length - 1"
+        ></RecentCountry>
+      </v-card-text>
+    </v-card>
+    <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
       <v-card-title>{{ $t('travelDetails.address.title') }}</v-card-title>
       <v-card-text>
         <Address
@@ -146,20 +162,20 @@ import Address from "@/components/TravelDetailsPage/Address";
 import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
 import emailRequiredMixin from "@/utils/validations/EmailRequiredMixin";
 import nationalIdNumberRequiredMixin from "@/utils/validations/NationalIdNumberRequiredMixin";
+import RecentCountry from "@/components/TravelDetailsPage/RecentCountry";
 
 export default {
   name: 'TravellerDetailsForm',
   props: ['title', 'travellerId'],
   mixins: [fieldRequiredMixin, emailRequiredMixin, nationalIdNumberRequiredMixin],
   components: {
+    RecentCountry,
     Address,
     Phone
   },
-  data: function () {
-    return {
+  data: () => ({
       dateOfBirthDialogVisible: false
-    }
-  },
+  }),
   watch: {
     dateOfBirthDialogVisible (val) {
       val && setTimeout(() => (this.$refs.dateOfBirthPicker.activePicker = 'YEAR'))
@@ -196,6 +212,10 @@ export default {
       let addressIds = this.traveller().contactInformation.addresses;
       return addressIds.map(id => this.addresses[id]);
     },
+    recentCountries(){
+      let recentCountryIds = this.traveller().recentCountries;
+      return recentCountryIds.map(id => this.recentCountries[id]);
+    },
     dateOfBirth: {
       get() {
         return this.traveller.dateOfBirth;
@@ -207,6 +227,7 @@ export default {
     ...mapState('registration/traveller', ['travellers']),
     ...mapState('registration/traveller', ['phones']),
     ...mapState('registration/traveller', ['addresses']),
+    ...mapState('registration/traveller', ['recentCountries']),
     ...mapState('lookups', ['sexTypes','identityDocumentTypes', 'countries'])
   }
 }

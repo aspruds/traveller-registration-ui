@@ -2,7 +2,7 @@ export class RecentCountry {
     constructor({
                     id = null,
                     countryCode =  '',
-                    dateOfExit = []
+                    dateOfExit = ''
                 } = {}) {
         this.id = id;
         this.countryCode = countryCode;

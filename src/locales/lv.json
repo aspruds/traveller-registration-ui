@@ -47,8 +47,16 @@
     },
     "phone": {
       "title": "Tālrunis",
-      "addPhone": "Pievienot papildus tālruņa numuru",
+      "addPhone": "Pievienot tālruņa numuru",
       "removePhone": "Dzēst tālruņa numuru"
+    },
+    "recentCountry": {
+      "title": "Nesen apmeklētās valstis",
+      "subtitle": "Lūdzu norādiet visas valstis, kuras apmeklētas pēdējo 14 dienu laikā",
+      "country": "Valsts",
+      "dateOfExit": "Izceļošanas datums",
+      "addCountry": "Pievienot valsti",
+      "removeCountry": "Dzēst valsti"
     },
     "address": {
       "title": "Adrese",
@@ -61,7 +69,7 @@
       "street": "Iela",
       "house": "Ēkas numurs/Nosaukums, korpuss",
       "flat": "Telpu grupa/dzīvoklis",
-      "addAddress": "Pievienot papildus adresi",
+      "addAddress": "Pievienot adresi",
       "removeAddress": "Dzēst adresi"
     }
   },

@@ -47,8 +47,16 @@
     },
     "phone": {
       "title": "Phone",
-      "addPhone": "Add Another Phone",
+      "addPhone": "Add Phone",
       "removePhone": "Remove Phone"
+    },
+    "recentCountry": {
+      "title": "Recently Visited Countries",
+      "subtitle": "Please specify all countries which you were visited during the last 14 days",
+      "country": "Country",
+      "dateOfExit": "Date of Exit",
+      "addCountry": "Add Country",
+      "removeCountry": "Remove Country"
     },
     "address": {
       "title": "Address",
@@ -61,7 +69,7 @@
       "street": "Street",
       "house": "Building Number/Name, corps",
       "flat": "Group of Premises/Apartment",
-      "addAddress": "Add Another Address",
+      "addAddress": "Add Address",
       "removeAddress": "Remove Address"
     }
   },
