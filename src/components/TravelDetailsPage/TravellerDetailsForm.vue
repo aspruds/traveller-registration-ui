@@ -43,39 +43,13 @@
             v-if="traveller.citizenship === 'lv'"
             :rules="[fieldRequired, nationalIdNumberRequired]"
         ></v-text-field>
-        <v-dialog
-            ref="dateOfBirthDialog"
-            v-model="dateOfBirthDialogVisible"
-            :return-value.sync="traveller.dateOfBirth"
-            persistent
-            width="290px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-                v-model="traveller.dateOfBirth"
-                :label="$t('travelDetails.passengerDetails.dateOfBirth')"
-                :rules="[fieldRequired]"
-                readonly
-                v-bind="attrs"
-                v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-              :locale="$i18n.locale"
-              v-model="traveller.dateOfBirth"
-              ref="dateOfBirthPicker"
-              min="1900-01-01"
-              :max="new Date().toISOString().substr(0, 10)"
-              scrollable>
-            <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="dateOfBirthDialogVisible = false">
-              {{ $t('forms.buttons.cancel') }}
-            </v-btn>
-            <v-btn text color="primary" @click="$refs.dateOfBirthDialog.save(traveller.dateOfBirth)">
-              {{ $t('forms.buttons.confirm') }}
-            </v-btn>
-          </v-date-picker>
-        </v-dialog>
+        <DatePicker :value="traveller.dateOfBirth"
+                    @input="setDateOfBirth({ id: travellerId, value: $event })"
+                    :label="$t('travelDetails.passengerDetails.dateOfBirth')"
+                    minValue="1900-01-01"
+                    :maxValue="moment().format()"
+                    :start-with-year="true"
+                    :validation-rules="[fieldRequired]"/>
         <v-select
             :value="traveller.identityDocument.documentType"
             @change="setIdentityDocumentType({ id: travellerId, value: $event })"
@@ -163,6 +137,8 @@ import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
 import emailRequiredMixin from "@/utils/validations/EmailRequiredMixin";
 import nationalIdNumberRequiredMixin from "@/utils/validations/NationalIdNumberRequiredMixin";
 import RecentCountry from "@/components/TravelDetailsPage/RecentCountry";
+import DatePicker from "@/components/DatePicker";
+import moment from 'moment';
 
 export default {
   name: 'TravellerDetailsForm',
@@ -171,20 +147,14 @@ export default {
   components: {
     RecentCountry,
     Address,
-    Phone
-  },
-  data: () => ({
-      dateOfBirthDialogVisible: false
-  }),
-  watch: {
-    dateOfBirthDialogVisible (val) {
-      val && setTimeout(() => (this.$refs.dateOfBirthPicker.activePicker = 'YEAR'))
-    },
+    Phone,
+    DatePicker
   },
   mounted() {
     this.initialize(this.travellerId)
   },
   methods: {
+    moment: () => moment(),
     ...mapMutations('registration/traveller', [
         'setFirstName',
         'setLastName',
@@ -215,14 +185,6 @@ export default {
     recentCountries(){
       let recentCountryIds = this.traveller().recentCountries;
       return recentCountryIds.map(id => this.recentCountries[id]);
-    },
-    dateOfBirth: {
-      get() {
-        return this.traveller.dateOfBirth;
-      },
-      set(value) {
-        this.setDateOfBirth(value);
-      }
     },
     ...mapState('registration/traveller', ['travellers']),
     ...mapState('registration/traveller', ['phones']),

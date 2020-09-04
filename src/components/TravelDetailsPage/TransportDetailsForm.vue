@@ -20,37 +20,12 @@
             :rules="[fieldRequired, flightNumberRequired]"
             :label="$t('travelDetails.transportDetails.flightNumber')"
         ></v-text-field>
-        <v-dialog
-            ref="dateOfEntryDialog"
-            v-model="dateOfEntryDialogVisible"
-            :return-value.sync="dateOfEntry"
-            persistent
-            width="290px"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-                v-model="dateOfEntry"
-                :rules="[fieldRequired]"
-                :label="$t('travelDetails.transportDetails.dateOfEntry')"
-                readonly
-                v-bind="attrs"
-                v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-              ref="dateOfEntryDatePicker"
-              :locale="$i18n.locale"
-              v-model="dateOfEntry"
-              scrollable>
-            <v-spacer></v-spacer>
-            <v-btn text color="primary" @click="dateOfEntryDialogVisible = false">
-              {{ $t('forms.buttons.cancel') }}
-            </v-btn>
-            <v-btn text color="primary" @click="$refs.dateOfEntryDialog.save(dateOfEntry)">
-              {{ $t('forms.buttons.confirm') }}
-            </v-btn>
-          </v-date-picker>
-        </v-dialog>
+        <DatePicker :value="dateOfEntry"
+                    @input="setDateOfEntry($event)"
+                    :min-value="moment().subtract(13, 'days').format()"
+                    :max-value="moment().add(2, 'days').format()"
+                    :label="$t('travelDetails.transportDetails.dateOfEntry')"
+                    :validation-rules="[fieldRequired]"/>
       </v-card-text>
     </v-card>
   </div>
@@ -60,17 +35,16 @@
 import {mapState, mapMutations} from 'vuex'
 import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
 import flightNumberRequiredMixin from "@/utils/validations/FlightNumberRequiredMixin";
+import DatePicker from "@/components/DatePicker";
+import moment from 'moment';
 
 export default {
   name: 'TransportDetails',
   props: ['title'],
+  components: {DatePicker},
   mixins: [fieldRequiredMixin, flightNumberRequiredMixin],
-  data: function () {
-    return {
-      dateOfEntryDialogVisible: false
-    }
-  },
   methods: {
+    moment: () => moment(),
     ...mapMutations('registration/transportDetail', [
       'setCarrierType',
       'setFlightNumber',
@@ -78,16 +52,7 @@ export default {
     ]),
   },
   computed: {
-    dateOfEntry: {
-      get() {
-        return this.dateOfEntryGetter;
-      },
-      set(value) {
-        this.setDateOfEntry(value);
-      }
-    },
-    ...mapState('registration/transportDetail', ['carrierType','flightNumber']),
-    ...mapState('registration/transportDetail', {dateOfEntryGetter: 'dateOfEntry'}),
+    ...mapState('registration/transportDetail', ['carrierType','flightNumber','dateOfEntry']),
     ...mapState('lookups', ['carrierTypes']),
   }
 }
