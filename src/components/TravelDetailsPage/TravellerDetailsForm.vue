@@ -7,13 +7,13 @@
             :value="traveller.firstName"
             @change="setFirstName({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.firstName')"
-            :rules="[fieldRequired]"
+            :rules="[validators.required, validators.name]"
         ></v-text-field>
         <v-text-field
             :value="traveller.lastName"
             @change="setLastName({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.lastName')"
-            :rules="[fieldRequired]"
+            :rules="[validators.required, validators.name]"
         ></v-text-field>
         <v-select
             :value="traveller.sex"
@@ -22,7 +22,7 @@
             :label="$t('travelDetails.passengerDetails.sex')"
             item-text="name"
             item-value="code"
-            :rules="[fieldRequired]"
+            :rules="[validators.required]"
             required
         ></v-select>
         <v-select
@@ -32,7 +32,7 @@
             :label="$t('travelDetails.passengerDetails.citizenship')"
             item-text="name"
             item-value="code"
-            :rules="[fieldRequired]"
+            :rules="[validators.required]"
             required
         ></v-select>
         <v-text-field
@@ -41,7 +41,7 @@
             @change="setNationalId({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.nationalId')"
             v-if="traveller.citizenship === 'lv'"
-            :rules="[fieldRequired, nationalIdNumberRequired]"
+            :rules="[validators.required, validators.nationalIdNumber]"
         ></v-text-field>
         <DatePicker :value="traveller.dateOfBirth"
                     @input="setDateOfBirth({ id: travellerId, value: $event })"
@@ -49,14 +49,14 @@
                     minValue="1900-01-01"
                     :maxValue="moment().format()"
                     :start-with-year="true"
-                    :validation-rules="[fieldRequired]"/>
+                    :validation-rules="[validators.required]"/>
         <v-select
             :value="traveller.identityDocument.documentType"
             @change="setIdentityDocumentType({ id: travellerId, value: $event })"
             :items="identityDocumentTypes"
             item-text="name"
             item-value="code"
-            :rules="[fieldRequired]"
+            :rules="[validators.required]"
             :label="$t('travelDetails.passengerDetails.identityDocumentType')"
             required
         ></v-select>
@@ -64,19 +64,19 @@
             :value="traveller.identityDocument.documentNumber"
             @change="setIdentityDocumentNumber({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.identityDocumentNumber')"
-            :rules="[fieldRequired]"
+            :rules="[validators.required]"
         ></v-text-field>
         <v-text-field
             :value="traveller.contactInformation.email"
             @change="setEmail({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.email')"
-            :rules="[fieldRequired, emailRequired]"
+            :rules="[validators.required, validators.email]"
         ></v-text-field>
         <v-text-field
             :value="traveller.seat"
             @change="setSeat({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.seat')"
-            :rules="[fieldRequired]"
+            :rules="[validators.required]"
         ></v-text-field>
       </v-card-text>
     </v-card>
@@ -133,9 +133,7 @@
 import {mapState, mapMutations, mapGetters, mapActions} from 'vuex'
 import Phone from "@/components/TravelDetailsPage/Phone";
 import Address from "@/components/TravelDetailsPage/Address";
-import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
-import emailRequiredMixin from "@/utils/validations/EmailRequiredMixin";
-import nationalIdNumberRequiredMixin from "@/utils/validations/NationalIdNumberRequiredMixin";
+import * as validators from "@/utils/validations/validators.js"
 import RecentCountry from "@/components/TravelDetailsPage/RecentCountry";
 import DatePicker from "@/components/DatePicker";
 import moment from 'moment';
@@ -143,7 +141,6 @@ import moment from 'moment';
 export default {
   name: 'TravellerDetailsForm',
   props: ['title', 'travellerId'],
-  mixins: [fieldRequiredMixin, emailRequiredMixin, nationalIdNumberRequiredMixin],
   components: {
     RecentCountry,
     Address,
@@ -170,6 +167,7 @@ export default {
     ...mapActions('registration/traveller', ['initialize'])
   },
   computed: {
+    validators: () => validators,
     ...mapGetters('registration/traveller', ['travellerById']),
     traveller(){
       return this.travellerById(this.travellerId);

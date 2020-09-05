@@ -7,13 +7,16 @@
         :label="$t('travelDetails.recentCountry.country')"
         item-text="name"
         item-value="code"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
         required
     ></v-select>
     <DatePicker :value="recentCountry.dateOfExit"
                 @input="setDateOfExit({ id: recentCountry.id, value: $event })"
                 :label="$t('travelDetails.recentCountry.dateOfExit')"
-                :validation-rules="[fieldRequired]"/>
+                :validation-rules="[validators.required]"
+                :min-value="moment().subtract(14, 'days').format()"
+                :max-value="moment().add(2, 'days').format()"
+    />
     <div class="buttons">
       <v-btn class="button" v-if="lastItem" small color="secondary"
              @click="addRecentCountry(travellerId)">
@@ -29,15 +32,16 @@
 
 <script>
 import {mapState, mapMutations, mapActions} from 'vuex'
-import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
+import * as validators from "@/utils/validations/validators.js"
 import DatePicker from "@/components/DatePicker";
+import moment from 'moment';
 
 export default {
   name: 'RecentCountry',
   components: {DatePicker},
   props: ['travellerId', 'recentCountry', 'recentCountryIds', 'firstItem', 'lastItem', 'onlyItem'],
-  mixins: [fieldRequiredMixin],
   methods: {
+    moment: () => moment(),
     ...mapMutations('registration/traveller/recentCountries', [
         'setCountryCode',
         'setDateOfExit'
@@ -45,6 +49,7 @@ export default {
     ...mapActions('registration/traveller', ['addRecentCountry', 'deleteRecentCountry'])
   },
   computed: {
+    validators: () => validators,
     recentCountries(){
       return this.recentCountriesIds.map(id => this.recentCountries[id]);
     },

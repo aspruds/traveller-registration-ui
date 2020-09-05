@@ -6,14 +6,14 @@
           @change="setPhoneCountryCode({ id: phone.id, value: $event })"
           class="pe-8 flex-grow-0"
           :label="$t('travelDetails.passengerDetails.phoneCountryCode')"
-          :rules="[fieldRequired]"
+          :rules="[validators.required]"
       ></v-text-field>
       <v-text-field
           :value="phone.phoneNumber"
           @change="setPhoneNumber({ id: phone.id, value: $event })"
           class="flex-grow-1"
           :label="$t('travelDetails.passengerDetails.phoneNumber')"
-          :rules="[fieldRequired]"
+          :rules="[validators.required]"
       ></v-text-field>
     </v-container>
     <div class="buttons">
@@ -29,12 +29,11 @@
 
 <script>
 import {mapState, mapMutations, mapActions} from 'vuex'
-import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
+import * as validators from "@/utils/validations/validators.js"
 
 export default {
   name: 'Phone',
   props: ['travellerId', 'phone', 'phoneIds', 'firstItem', 'lastItem', 'onlyItem'],
-  mixins: [fieldRequiredMixin],
   methods: {
     ...mapMutations('registration/traveller/phones', [
         'setPhoneCountryCode',
@@ -43,6 +42,7 @@ export default {
     ...mapActions('registration/traveller', ['addPhone', 'deletePhone'])
   },
   computed: {
+    validators: () => validators,
     phones(){
       return this.phoneIds.map(id => this.phones[id]);
     },

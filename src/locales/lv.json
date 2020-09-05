@@ -9,9 +9,10 @@
     },
     "validators": {
       "fieldRequired": "Obligāts lauks",
+      "nameRequired": "Atļauti tikai latīņu alfabēta  burti, kā arī intervāls, apostrofs un domu zīme",
       "emailRequired": "Nepieciešama e-pasta adrese formā xx@xx.xx",
       "nationalIdNumberRequired": "Lūdzu ievadiet personas kodu formātā xxxxxx-xxxxx",
-      "flightNumberRequired": "Lūdzu ievadiet lidojuma numuru. Lidojuma numurs sākas ar diviem burtiem (aviosabiedrības kods), kam seko 1-4 cipari ar reisa numuru. Piemēram, BT101"
+      "flightNumberRequired": "Lidojuma numurs sākas ar diviem burtiem (aviosabiedrības kods), kam seko 1-4 cipari ar reisa numuru. Piemēram, BT101"
     }
   },
   "introduction": {
@@ -28,7 +29,15 @@
     "transportDetails":{
       "carrierType":"Pārvadātāja veids",
       "flightNumber":"Lidojuma numurs",
-      "dateOfEntry":"Ieceļošanas datums"
+      "flightNumberHint":"Lidojuma numurs sākas ar diviem burtiem (aviosabiedrības kods), kam seko 1-4 cipari ar reisa numuru. Piemēram, BT101",
+      "routeNumber": "Reisa numurs",
+      "routeNumberKnown": "Reisa numurs ir zināms",
+      "routeNumberUnknown": "Reisa numurs nav zināms",
+      "routeOrigin": "Reisa sākuma punkts",
+      "routeDepartureDate": "Reisa atiešanas datums",
+      "routeDepartureTime": "Reisa atiešanas laiks",
+      "dateOfEntry":"Ieceļošanas datums",
+      "dateOfEntryHint":"Datums nevar būt mazāks par esošo datumu: -13 un lielāks par +2 dienas"
     },
     "passengerDetails":{
       "firstName": "Vārds",

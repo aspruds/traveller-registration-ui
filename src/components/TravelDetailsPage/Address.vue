@@ -7,56 +7,56 @@
         :label="$t('travelDetails.address.country')"
         item-text="name"
         item-value="code"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
         required
     ></v-select>
     <v-text-field
         :value="address.zip"
         @change="setZip({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.zip')"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
     ></v-text-field>
     <v-text-field
         :value="address.province"
         @change="setProvince({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.province')"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
     ></v-text-field>
     <v-text-field
         :value="address.city"
         @change="setCity({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.city')"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
     ></v-text-field>
     <v-text-field
         :value="address.district"
         @change="setDistrict({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.district')"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
     ></v-text-field>
     <v-text-field
         :value="address.village"
         @change="setVillage({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.village')"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
     ></v-text-field>
     <v-text-field
         :value="address.street"
         @change="setStreet({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.street')"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
     ></v-text-field>
     <v-text-field
         :value="address.house"
         @change="setHouse({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.house')"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
     ></v-text-field>
     <v-text-field
         :value="address.flat"
         @change="setFlat({ id: address.id, value: $event })"
         :label="$t('travelDetails.address.flat')"
-        :rules="[fieldRequired]"
+        :rules="[validators.required]"
     ></v-text-field>
     <div class="buttons">
       <v-btn class="button" v-if="lastItem" small color="secondary" @click="addAddress(travellerId)">
@@ -71,12 +71,11 @@
 
 <script>
 import {mapState, mapMutations, mapActions} from 'vuex'
-import fieldRequiredMixin from "@/utils/validations/FieldRequiredMixin";
+import * as validators from "@/utils/validations/validators.js"
 
 export default {
   name: 'Address',
   props: ['travellerId', 'address', 'addressIds', 'firstItem', 'lastItem', 'onlyItem'],
-  mixins: [fieldRequiredMixin],
   methods: {
     ...mapMutations('registration/traveller/addresses', [
         'setCountry',
@@ -94,6 +93,7 @@ export default {
     ...mapActions('registration/traveller', ['addAddress', 'deleteAddress'])
   },
   computed: {
+    validators: () => validators,
     addresses(){
       return this.addressIds.map(id => this.addresses[id]);
     },

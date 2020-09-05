@@ -9,9 +9,10 @@
     },
     "validators": {
       "fieldRequired": "This field is required",
+      "nameRequired": "Only latin characters and space, dash and apostrophe are allowed",
       "emailRequired": "Please enter email in format xx@xx.xx",
       "nationalIdNumberRequired": "Please enter national id in format xxxxxx-xxxxx",
-      "flightNumberRequired": "Please enter flight number. Flight number starts with two letter indicating airline code, followed by 1-4 digits (flight number). For example, BT101"
+      "flightNumberRequired": "Flight number starts with two letter indicating airline code, followed by 1-4 digits (flight number). For example, BT101"
     }
   },
   "introduction": {
@@ -26,9 +27,17 @@
       "passengerDetails": "Passenger Details"
     },
     "transportDetails":{
-      "carrierType":"Carrier type",
-      "flightNumber":"Flight number",
-      "dateOfEntry":"Date of Entry"
+      "carrierType":"Carrier Type",
+      "flightNumber":"Flight Number",
+      "flightNumberHint":"Flight number starts with two letter indicating airline code, followed by 1-4 digits (flight number). For example, BT101",
+      "routeNumber": "Route Number",
+      "routeNumberKnown": "Route Number Known",
+      "routeNumberUnknown": "Route Number Unknown",
+      "routeOrigin": "Route Origin",
+      "routeDepartureDate": "Route Departure Date",
+      "routeDepartureTime": "Route Departure Time",
+      "dateOfEntry":"Date of Entry",
+      "dateOfEntryHint":"Date between current date minus 13 days and plus 2 days"
     },
     "passengerDetails":{
       "firstName": "First Name",
