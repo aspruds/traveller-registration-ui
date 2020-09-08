@@ -6,7 +6,7 @@
         <v-select
             :value="carrierType"
             @change="setCarrierType"
-            :items="carrierTypes"
+            :items="getCarrierTypes"
             item-text="name"
             item-value="code"
             :rules=" [validators.required]"
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import {mapState, mapMutations} from 'vuex'
+import {mapState, mapMutations, mapGetters} from 'vuex'
 import DatePicker from "@/components/DatePicker";
 import moment from 'moment';
 import * as validators from "@/utils/validations/validators.js"
@@ -123,7 +123,7 @@ export default {
       'routeDepartureTime',
       'dateOfEntry',
     ]),
-    ...mapState('lookups', ['carrierTypes']),
+    ...mapGetters('lookups', ['getCarrierTypes']),
   }
 }
 </script>

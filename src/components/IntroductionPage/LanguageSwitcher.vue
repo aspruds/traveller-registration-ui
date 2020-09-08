@@ -26,7 +26,6 @@ export default {
       locales: [
         { code: "lv", name: "Latviešu" },
         { code: "en", name: "English" },
-        { code: "ru", name: "По-русски" }
       ]
     }
   }
