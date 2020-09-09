@@ -7,7 +7,7 @@ export class Traveller {
                     firstName = '',
                     lastName = '',
                     sex = null,
-                    citizenship = null,
+                    citizenship = 'LV',
                     nationalId = '',
                     dateOfBirth = null,
                     seat = '',

@@ -18,7 +18,7 @@
         <v-select
             :value="traveller.sex"
             @change="setSex({ id: travellerId, value: $event })"
-            :items="getSexTypes"
+            :items="sexTypes"
             :label="$t('travelDetails.passengerDetails.sex')"
             item-text="name"
             item-value="code"
@@ -28,7 +28,7 @@
         <v-select
             :value="traveller.citizenship"
             @change="setCitizenship({ id: travellerId, value: $event })"
-            :items="getCountries"
+            :items="countries"
             :label="$t('travelDetails.passengerDetails.citizenship')"
             item-text="name"
             item-value="code"
@@ -40,7 +40,7 @@
             :hint="$t('travelDetails.passengerDetails.nationalIdHint')"
             @change="setNationalId({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.nationalId')"
-            v-if="traveller.citizenship === 'lv'"
+            v-if="traveller.citizenship === 'LV'"
             :rules="[validators.required, validators.nationalIdNumber]"
         ></v-text-field>
         <DatePicker :value="traveller.dateOfBirth"
@@ -53,7 +53,7 @@
         <v-select
             :value="traveller.identityDocument.documentType"
             @change="setIdentityDocumentType({ id: travellerId, value: $event })"
-            :items="getIdentityDocumentTypes"
+            :items="identityDocumentTypes"
             item-text="name"
             item-value="code"
             :rules="[validators.required]"
@@ -185,7 +185,7 @@ export default {
       return recentCountryIds.map(id => this.recentCountries[id]);
     },
     ...mapState('registration/traveller', ['travellers', 'phones', 'addresses', 'recentCountries']),
-    ...mapGetters('lookups', ['getSexTypes', 'getIdentityDocumentTypes', 'getCountries']),
+    ...mapState('lookups', ['sexTypes', 'identityDocumentTypes', 'countries']),
   }
 }
 </script>

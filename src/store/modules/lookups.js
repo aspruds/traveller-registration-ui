@@ -1,4 +1,5 @@
 import i18n from '@/plugins/i18n.js'
+import isoCountries from '@/plugins/iso-countries'
 
 const initialState = () => ({
   carrierTypes: [
@@ -12,10 +13,7 @@ const initialState = () => ({
     { code: "female" },
     { code: "other" },
   ],
-  countries: [
-    { code: "lv" },
-    { code: "zz" }
-  ],
+  countries: Object.keys(isoCountries.getAlpha2Codes()).map(c => ({code: c})),
   identityDocumentTypes: [
     { code: "passport" },
     { code: "nationalIdCard" },
@@ -23,33 +21,46 @@ const initialState = () => ({
   ],
 });
 
-const translateNames = (lookups, translationPath) => {
+
+const translateLookups = (lookups, translationPath) => {
   let path = translationPath + "."
   return lookups.map((lookup) => (
       {...lookup, 'name': i18n.t(path + lookup.code)})
   )
 }
 
-const getters = {
-  getCarrierTypes: (state) => (
-    translateNames(state.carrierTypes, "lookups.carrierTypes")
-  ),
-  getSexTypes: (state) => (
-      translateNames(state.sexTypes, "lookups.sexTypes")
-  ),
-  getCountries: (state) => (
-      translateNames(state.countries, "lookups.countries")
-  ),
-  getIdentityDocumentTypes: (state) => (
-      translateNames(state.identityDocumentTypes, "lookups.identityDocumentTypes")
-  )
+const translateCountry = code => (
+    isoCountries.getName(code, i18n.locale)
+)
+
+const translateCountryCodes = countries => (
+     countries
+        .map(c => ({...c, name: translateCountry(c.code)}))
+        .sort((a, b) => (a.name > b.name) ? 1 : -1)
+)
+
+const translatedState = () => {
+  let state = initialState();
+  return {
+   carrierTypes: translateLookups(state.carrierTypes, "lookups.carrierTypes"),
+   sexTypes: translateLookups(state.sexTypes, "lookups.sexTypes"),
+   countries: translateCountryCodes(state.countries),
+   identityDocumentTypes: translateLookups(state.identityDocumentTypes, "lookups.identityDocumentTypes")
+  }
 }
 
 export default {
   namespaced: true,
-  getters,
-  state: initialState(),
-  mutations: {},
-  actions: {},
+  state: translatedState(),
+  mutations: {
+    updateTranslations(state) {
+      Object.assign(state, translatedState())
+    }
+  },
+  actions: {
+    updateTranslations({commit}) {
+      commit('updateTranslations')
+    }
+  },
   modules: {}
 }

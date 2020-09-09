@@ -13,12 +13,16 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
   name: 'LanguageSwitcher',
   methods: {
     switchLocale(locale) {
       this.$root.$i18n.locale = locale;
-    }
+      this.updateTranslations();
+    },
+    ...mapActions('lookups', ['updateTranslations']),
   },
   data: function () {
     return {
