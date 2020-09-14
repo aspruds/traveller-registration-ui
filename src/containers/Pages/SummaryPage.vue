@@ -1,13 +1,19 @@
 <template>
   <div class="summary-page">
     <h1>Summary</h1>
-    <v-btn @click="showConfirmation" :title="$t('travelDetails.continueButton')"/>
-    <v-btn @click="showDepartedCountries" :title="$t('travelDetails.returnButton')"/>
+    <div class="buttons">
+      <v-btn class="button" @click="showConfirmation" color="primary">
+        {{ $t('forms.buttons.continue') }}
+      </v-btn>
+      <v-btn class="button" @click="showTravelDetails">
+        {{ $t('forms.buttons.return') }}
+      </v-btn>
+    </div>
   </div>
 </template>
 
 <script>
-import {CONFIRMATION_PAGE, DEPARTED_COUNTRIES_PAGE} from "@/utils/router/routes";
+import {CONFIRMATION_PAGE, TRAVEL_DETAILS_PAGE} from "@/utils/router/routes";
 import {pushRoute} from "@/utils/router/router-utils";
 
 export default {
@@ -16,8 +22,8 @@ export default {
     showConfirmation() {
       pushRoute(this.$router, this.$route, CONFIRMATION_PAGE)
     },
-    showDepartedCountries() {
-      pushRoute(this.$router, this.$route, DEPARTED_COUNTRIES_PAGE)
+    showTravelDetails() {
+      pushRoute(this.$router, this.$route, TRAVEL_DETAILS_PAGE)
     }
   },
 }
@@ -27,29 +33,40 @@ export default {
 @import '@/assets/styles/common.scss';
 
 .summary-page {
-  padding: 40px;
+  padding: 0;
   margin: 0;
+  @include media(">=phone") {
+    padding: 10px 40px 40px 40px;
+  }
 
   h1 {
-    margin: 0 0 12px 0;
+    margin: 6px 0 12px 12px;
     font-size: em(30);
   }
-}
-</style>
 
-<i18n>
-{
-  "en": {
-   "travelDetails": {
-      "returnButton": "Return",
-      "continueButton": "Continue"
-   }
-  },
-  "lv": {
-    "travelDetails": {
-      "returnButton": "Atgriezties",
-      "continueButton": "Turpināt"
+  .buttons {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 20px;
+
+    @include media(">=phone") {
+      margin-left: 0;
+      margin-right: 0;
+      margin-top: 30px;
+      display: flex;
+    }
+  }
+
+  .button {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+
+    @include media(">=phone") {
+      width: auto;
+      margin-bottom: 0;
+      margin-right: 10px;
     }
   }
 }
-</i18n>
+</style>

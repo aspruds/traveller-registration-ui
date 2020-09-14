@@ -10,7 +10,7 @@
                           :key="travellerId"></TravellerDetailsForm>
     </v-form>
     <div class="buttons">
-      <v-btn class="button" @click="showDepartedCountries" color="primary">
+      <v-btn class="button" @click="showSummary" color="primary">
         {{ $t('forms.buttons.continue') }}
       </v-btn>
       <v-btn class="button" @click="showIntroduction">
@@ -27,7 +27,7 @@ import TravellerDetailsForm from "@/components/TravelDetailsPage/TravellerDetail
 import store from '@/store/index';
 import { registration } from '@/store/modules/registration';
 import {mapState} from "vuex";
-import {DEPARTED_COUNTRIES_PAGE, INTRODUCTION_PAGE} from "@/utils/router/routes";
+import {INTRODUCTION_PAGE, SUMMARY_PAGE} from "@/utils/router/routes";
 import {pushRoute} from "@/utils/router/router-utils";
 
 if (!store.state.registration) store.registerModule(`registration`, registration);
@@ -47,10 +47,10 @@ export default {
     showIntroduction() {
       pushRoute(this.$router, this.$route, INTRODUCTION_PAGE)
     },
-    showDepartedCountries() {
+    showSummary() {
       this.$refs.form.validate();
       if(this.valid) {
-        pushRoute(this.$router, this.$route, DEPARTED_COUNTRIES_PAGE)
+        pushRoute(this.$router, this.$route, SUMMARY_PAGE)
       }
     }
   },
