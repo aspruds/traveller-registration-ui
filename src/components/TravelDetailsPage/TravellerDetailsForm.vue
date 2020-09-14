@@ -1,6 +1,6 @@
 <template>
   <div class="passenger-details">
-    <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
+    <Card>
       <v-card-title>{{ title }}</v-card-title>
       <v-card-text>
         <v-text-field
@@ -78,8 +78,8 @@
             :label="$t('travelDetails.passengerDetails.seat')"
         ></v-text-field>
       </v-card-text>
-    </v-card>
-    <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
+    </Card>
+    <Card>
       <v-card-title>{{ $t('travelDetails.phone.title') }}</v-card-title>
       <v-card-text>
         <Phone
@@ -93,8 +93,8 @@
             :lastItem="index == Object.keys(phones).length - 1"
         ></Phone>
       </v-card-text>
-    </v-card>
-    <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
+    </Card>
+    <Card>
       <v-card-title>{{ $t('travelDetails.recentCountry.title') }}</v-card-title>
       <v-card-subtitle>{{ $t('travelDetails.recentCountry.subtitle') }}</v-card-subtitle>
       <v-card-text>
@@ -112,8 +112,8 @@
             :lastItem="index == Object.keys(recentCountries).length - 1"
         ></RecentCountry>
       </v-card-text>
-    </v-card>
-    <v-card v-if="isolationRequired" :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
+    </Card>
+    <Card v-if="isolationRequired">
       <v-card-title>{{ $t('travelDetails.address.title') }}</v-card-title>
       <v-card-text>
         <Address
@@ -127,7 +127,7 @@
             :lastItem="index == Object.keys(addresses).length - 1"
         ></Address>
       </v-card-text>
-    </v-card>
+    </Card>
   </div>
 </template>
 
@@ -139,11 +139,13 @@ import * as validators from "@/utils/validations/validators.js"
 import RecentCountry from "@/components/TravelDetailsPage/RecentCountry";
 import DatePicker from "@/components/DatePicker";
 import moment from 'moment';
+import Card from "@/components/Card";
 
 export default {
   name: 'TravellerDetailsForm',
   props: ['title', 'travellerId'],
   components: {
+    Card,
     RecentCountry,
     Address,
     Phone,

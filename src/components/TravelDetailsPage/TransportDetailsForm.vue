@@ -1,6 +1,6 @@
 <template>
   <div class="transport-details">
-    <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
+    <Card>
       <v-card-title>{{ title }}</v-card-title>
       <v-card-text>
         <v-select
@@ -75,7 +75,7 @@
                     :persistent-hint="true"
                     :validation-rules="[validators.required]"/>
       </v-card-text>
-    </v-card>
+    </Card>
   </div>
 </template>
 
@@ -85,11 +85,12 @@ import DatePicker from "@/components/DatePicker";
 import moment from 'moment';
 import * as validators from "@/utils/validations/validators.js"
 import TimePicker from "@/components/TimePicker";
+import Card from "@/components/Card";
 
 export default {
   name: 'TransportDetails',
   props: ['title'],
-  components: {TimePicker, DatePicker},
+  components: {Card, TimePicker, DatePicker},
   data: function () {
     return {
       ifRouteKnownOptions: [
