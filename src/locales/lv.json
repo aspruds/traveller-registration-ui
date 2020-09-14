@@ -65,7 +65,8 @@
       "country": "Valsts",
       "dateOfExit": "Izceļošanas datums",
       "addCountry": "Pievienot valsti",
-      "removeCountry": "Dzēst valsti"
+      "removeCountry": "Dzēst valsti",
+      "isolationRequired": "Nepieciešama 14 dienu ilga pašizolācija!"
     },
     "address": {
       "title": "Adrese",

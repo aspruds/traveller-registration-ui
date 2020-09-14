@@ -65,7 +65,8 @@
       "country": "Country",
       "dateOfExit": "Date of Exit",
       "addCountry": "Add Country",
-      "removeCountry": "Remove Country"
+      "removeCountry": "Remove Country",
+      "isolationRequired": "Mandatory 14-day isolation is required"
     },
     "address": {
       "title": "Address",

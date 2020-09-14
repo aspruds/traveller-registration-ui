@@ -1,7 +1,17 @@
 import Vue from 'vue'
 import {RecentCountry} from "@/models/RecentCountry";
+import shouldIsolate from "@/utils/isolation/isolation-utils";
 
 const state = () => ({})
+
+const getters = {
+    isolationRequired (state, getters, rootState) {
+        return Object.values(state).some(c =>
+            c.countryCode !== '' && c.dateOfExit !== '' &&
+            shouldIsolate(rootState.lookups.isolationRequirements, c.countryCode, c.dateOfExit)
+        )
+    },
+}
 
 const mutations = {
     setCountryCode(state, {id, value}) {
@@ -21,5 +31,6 @@ const mutations = {
 export default {
     namespaced: true,
     state,
+    getters,
     mutations
 }

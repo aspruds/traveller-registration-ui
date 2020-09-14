@@ -76,7 +76,6 @@
             :value="traveller.seat"
             @change="setSeat({ id: travellerId, value: $event })"
             :label="$t('travelDetails.passengerDetails.seat')"
-            :rules="[validators.required]"
         ></v-text-field>
       </v-card-text>
     </v-card>
@@ -99,6 +98,9 @@
       <v-card-title>{{ $t('travelDetails.recentCountry.title') }}</v-card-title>
       <v-card-subtitle>{{ $t('travelDetails.recentCountry.subtitle') }}</v-card-subtitle>
       <v-card-text>
+        <v-chip v-if="isolationRequired" class="pa-3 mb-3 badge red darken-3" text-color="white" label>
+          {{ $t('travelDetails.recentCountry.isolationRequired') }}
+        </v-chip>
         <RecentCountry
             v-for="(recentCountry, key, index) in recentCountries"
             :key="recentCountry.id"
@@ -111,7 +113,7 @@
         ></RecentCountry>
       </v-card-text>
     </v-card>
-    <v-card :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
+    <v-card v-if="isolationRequired" :class="$vuetify.breakpoint.smAndUp ? 'elevation-1' : 'elevation-0'" class="form-block mx-auto">
       <v-card-title>{{ $t('travelDetails.address.title') }}</v-card-title>
       <v-card-text>
         <Address
@@ -186,6 +188,7 @@ export default {
     },
     ...mapState('registration/traveller', ['travellers', 'phones', 'addresses', 'recentCountries']),
     ...mapState('lookups', ['sexTypes', 'identityDocumentTypes', 'countries']),
+    ...mapGetters('registration/traveller/recentCountries', ['isolationRequired']),
   }
 }
 </script>

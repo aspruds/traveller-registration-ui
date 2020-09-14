@@ -1,7 +1,7 @@
 export class Address {
     constructor({
                     id = null,
-                    countryCode= null,
+                    countryCode= 'LV',
                     zip= null,
                     province= null,
                     city= null,
