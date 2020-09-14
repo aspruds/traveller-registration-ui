@@ -6,14 +6,14 @@
           @change="setPhoneCountryCode({ id: phone.id, value: $event })"
           class="pe-8 flex-grow-0"
           :label="$t('travelDetails.passengerDetails.phoneCountryCode')"
-          :rules="[validators.required]"
+          :rules="[validators.required, validators.phoneCountryCode]"
       ></v-text-field>
       <v-text-field
           :value="phone.phoneNumber"
           @change="setPhoneNumber({ id: phone.id, value: $event })"
           class="flex-grow-1"
           :label="$t('travelDetails.passengerDetails.phoneNumber')"
-          :rules="[validators.required]"
+          :rules="[validators.required, validators.phoneNumber]"
       ></v-text-field>
     </v-container>
     <div class="buttons">

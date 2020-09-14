@@ -23,3 +23,13 @@ export function email(email) {
     let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return pattern.test(email) || i18n.t('forms.validators.emailRequired')
 }
+
+export function phoneCountryCode(input) {
+    let pattern = /^\+[0-9 ]+$/
+    return pattern.test(input) || i18n.t('forms.validators.phoneCountryCodeRequired')
+}
+
+export function phoneNumber(input) {
+    let pattern = /^[0-9][0-9 ]+$/
+    return pattern.test(input) || i18n.t('forms.validators.phoneNumberRequired')
+}

@@ -12,7 +12,9 @@
       "nameRequired": "Only latin characters and space, dash and apostrophe are allowed",
       "emailRequired": "Please enter email in format xx@xx.xx",
       "nationalIdNumberRequired": "Please enter national id in format xxxxxx-xxxxx",
-      "flightNumberRequired": "Flight number starts with two letter indicating airline code, followed by 1-4 digits (flight number). For example, BT101"
+      "flightNumberRequired": "Flight number starts with two letter indicating airline code, followed by 1-4 digits (flight number). For example, BT101",
+      "phoneCountryCodeRequired": "Phone country code should start with a + and contain only digits or spaces",
+      "phoneNumberRequired": "Phone number should only contain digits or spaces"
     }
   },
   "introduction": {

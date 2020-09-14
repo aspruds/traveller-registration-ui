@@ -12,7 +12,9 @@
       "nameRequired": "Atļauti tikai latīņu alfabēta  burti, kā arī intervāls, apostrofs un domu zīme",
       "emailRequired": "Nepieciešama e-pasta adrese formā xx@xx.xx",
       "nationalIdNumberRequired": "Lūdzu ievadiet personas kodu formātā xxxxxx-xxxxx",
-      "flightNumberRequired": "Lidojuma numurs sākas ar diviem burtiem (aviosabiedrības kods), kam seko 1-4 cipari ar reisa numuru. Piemēram, BT101"
+      "flightNumberRequired": "Lidojuma numurs sākas ar diviem burtiem (aviosabiedrības kods), kam seko 1-4 cipari ar reisa numuru. Piemēram, BT101",
+      "phoneCountryCodeRequired": "Valsts kodam jāsākas ar + un jāsatur tikai ciparus vai intervālus",
+      "phoneNumberRequired": "Telefona numuram jāsatur tikai ciparus vai intervālus"
     }
   },
   "introduction": {
