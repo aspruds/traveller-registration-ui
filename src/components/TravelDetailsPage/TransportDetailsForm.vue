@@ -12,7 +12,6 @@
             :rules=" [validators.required]"
             :label="$t('travelDetails.transportDetails.carrierType')"
             required
-            hide-details="true"
         ></v-select>
         <v-text-field
             :value="flightNumber"
@@ -128,12 +127,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" rel="stylesheet/scss" scoped>
-@import '@/assets/styles/common.scss';
-
-::v-deep .date-picker-input {
-  margin-top: 5px;
-}
-
-</style>

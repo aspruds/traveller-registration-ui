@@ -9,14 +9,14 @@
                           v-for="travellerId in travellerIds"
                           :key="travellerId"></TravellerDetailsForm>
     </v-form>
-    <div class="buttons">
+    <FormButtons>
       <v-btn class="button" @click="showSummary" color="primary">
         {{ $t('forms.buttons.continue') }}
       </v-btn>
       <v-btn class="button" @click="showIntroduction">
         {{ $t('forms.buttons.return') }}
       </v-btn>
-    </div>
+    </FormButtons>
   </div>
 </template>
 
@@ -29,12 +29,14 @@ import { registration } from '@/store/modules/registration';
 import {mapState} from "vuex";
 import {INTRODUCTION_PAGE, SUMMARY_PAGE} from "@/utils/router/routes";
 import {pushRoute} from "@/utils/router/router-utils";
+import FormButtons from "@/components/FormButtons";
 
 if (!store.state.registration) store.registerModule(`registration`, registration);
 
 export default {
   name: 'TravelDetailsPage',
   components: {
+    FormButtons,
     TravellerDetailsForm,
     TransportDetailsForm
   },
@@ -44,6 +46,14 @@ export default {
     }
   },
   methods: {
+    scrollToError() {
+      this.$nextTick(() => {
+        const el = document.querySelector(".v-input.error--text")
+        if(el != null) {
+          el.scrollIntoView()
+        }
+      })
+    },
     showIntroduction() {
       pushRoute(this.$router, this.$route, INTRODUCTION_PAGE)
     },
@@ -51,6 +61,8 @@ export default {
       this.$refs.form.validate();
       if(this.valid) {
         pushRoute(this.$router, this.$route, SUMMARY_PAGE)
+      } else {
+        this.scrollToError()
       }
     }
   },
@@ -79,31 +91,6 @@ export default {
     margin-bottom: 15px;
     &.v-sheet {
       background: $color-form-block-bg;
-    }
-  }
-
-  .buttons {
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-top: 20px;
-
-    @include media(">=phone") {
-      margin-left: 0;
-      margin-right: 0;
-      margin-top: 30px;
-      display: flex;
-    }
-  }
-
-  .button {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px;
-
-    @include media(">=phone") {
-      width: auto;
-      margin-bottom: 0;
-      margin-right: 10px;
     }
   }
 }

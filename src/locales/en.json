@@ -85,6 +85,9 @@
       "removeAddress": "Remove Address"
     }
   },
+  "summary": {
+    "pageTitle": "Summary"
+  },
   "lookups": {
     "carrierTypes": {
       "plane": "Plane",

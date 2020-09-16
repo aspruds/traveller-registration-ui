@@ -85,6 +85,9 @@
       "removeAddress": "Dzēst adresi"
     }
   },
+  "summary": {
+    "pageTitle": "Kopsavilkums"
+  },
   "lookups": {
     "carrierTypes": {
       "plane": "Lidmašīna",
